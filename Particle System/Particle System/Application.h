@@ -7,6 +7,7 @@
 #define GLFW_INCLUDE_GLCOREARB 1
 
 #include <GLFW/glfw3.h>
+#include "Logger.h"
 
 #pragma comment(lib, "glfw3_d.lib")
 #pragma comment(lib, "glu32.lib")
@@ -23,8 +24,10 @@ public:
 		_startup();
 	}
 
+protected:
+	Logger logger;
 private:
-
+	
 	void _update(double time) {
 		update(time);
 	}
