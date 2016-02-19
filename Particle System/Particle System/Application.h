@@ -15,8 +15,8 @@
 class Application {
 public:
 	virtual void startup() = 0;
-	virtual void render() = 0;
-	virtual void update() = 0;
+	virtual void render(double) = 0;
+	virtual void update(double) = 0;
 	virtual void userCallback() = 0;
 
 	void runApp() {
@@ -25,11 +25,20 @@ public:
 
 private:
 
+	void _update(double time) {
+		update(time);
+	}
+
+	void _render(double time) {
+		render(time);
+	}
+
+
 	void handleApp() {
 		while (!glfwWindowShouldClose(window))
 		{
-			update();
-			render();
+			_update(glfwGetTime());
+			_render(glfwGetTime());
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
@@ -52,6 +61,11 @@ private:
 		if (!glfwInit())
 			exit(EXIT_FAILURE);
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
 		window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
 		if (!window)
 		{
@@ -63,6 +77,8 @@ private:
 		glfwSwapInterval(1);
 		glfwSetKeyCallback(window, key_callback);
 		
+		gl3wInit();
+
 		handleApp();
 
 		glfwDestroyWindow(window);

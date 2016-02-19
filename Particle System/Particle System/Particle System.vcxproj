@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gl3w.c" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>

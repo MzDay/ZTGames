@@ -3,8 +3,8 @@
 
 class Game : public Application {
 public:
-	void update() override;
-	void render() override;
+	void update(double) override;
+	void render(double) override;
 	void startup() override;
 	void userCallback() override;
 };
