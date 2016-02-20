@@ -1,11 +1,7 @@
 #include "Game.h"
-#include <cmath>
-#include <iomanip>
-#include <thread>
-
-using namespace std::literals;
 
 void Game::startup() {
+	
 }
 
 void Game::update(double time) {
@@ -13,7 +9,6 @@ void Game::update(double time) {
 }
 
 void Game::render(double time) {
-
 	float r = static_cast<float>(std::sin(time));
 	float g = static_cast<float>(std::cos(time));
 	float b = static_cast<float>(std::sin(time));
@@ -27,5 +22,9 @@ void Game::render(double time) {
 }
 
 void Game::userCallback() {
+
+}
+
+void Game::shutdown() {
 
 }

@@ -16,6 +16,7 @@
 class Application {
 public:
 	virtual void startup() = 0;
+	virtual void shutdown() = 0;
 	virtual void render(double) = 0;
 	virtual void update(double) = 0;
 	virtual void userCallback() = 0;
