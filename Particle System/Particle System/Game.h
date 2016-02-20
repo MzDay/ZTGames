@@ -17,6 +17,11 @@ public:
 	void startup() override;
 	void shutdown() override;
 	void userCallback() override;
+
+private:
+	GLuint buf;
+	GLuint vao;
+	Program program;
 };
 
 #endif

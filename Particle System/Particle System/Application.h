@@ -83,12 +83,12 @@ private:
 		
 		gl3wInit();
 
+		startup();
+
 		handleApp();
 
 		glfwDestroyWindow(window);
 		glfwTerminate();
-
-		startup();
 	}
 
 

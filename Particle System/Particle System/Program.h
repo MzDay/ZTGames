@@ -16,7 +16,7 @@ public:
 	inline void createProgram() { program = glCreateProgram(); }
 	GLuint getProgram() { return program; }
 	void useProgram() { glUseProgram(program); }
-	void addShader(Shader);
+	void addShader(std::initializer_list<Shader>);
 private:
 	Program& operator=(const Program&) = delete;
 	Program(const Program&) = delete;
