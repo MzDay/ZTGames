@@ -132,9 +132,6 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Particle System.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Logger.h" />

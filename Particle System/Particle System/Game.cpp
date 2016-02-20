@@ -14,15 +14,13 @@ void Game::update(double time) {
 
 void Game::render(double time) {
 
-	float r = static_cast<float>(std::sin(time)) * 0.5f;
-	float g = static_cast<float>(std::cos(time)) * 0.6f;
-	float b = static_cast<float>(std::sin(time)) * 0.5f;
+	float r = static_cast<float>(std::sin(time));
+	float g = static_cast<float>(std::cos(time));
+	float b = static_cast<float>(std::sin(time));
 	
-	logger.logSuccess("Red:   " + std::to_string(r));
-	logger.logWarning("Green: " + std::to_string(g));
-	logger.logError("Blue:  " + std::to_string(b));
 	logger.logInfo("Red:   " + std::to_string(r));
-	logger.logSimple("Green: " + std::to_string(g));
+	logger.logInfo("Green: " + std::to_string(g));
+	logger.logInfo("Blue:  " + std::to_string(b));
 
 	GLfloat black[] = { r, g, b, 0.0f };
 	glClearBufferfv(GL_COLOR, 0, black);
