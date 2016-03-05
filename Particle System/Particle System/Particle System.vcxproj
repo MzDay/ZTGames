@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)ThirdParty/GL/include;$(ProjectDir)ThirdParty/GLFW/include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)ThirdParty/GL/include;$(ProjectDir)ThirdParty/GLM/;$(ProjectDir)ThirdParty/GLFW/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)ThirdParty/GLFW/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
