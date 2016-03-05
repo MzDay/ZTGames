@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <thread>
 #include "Program.h"
+#include <glm\glm.hpp>
 
 using namespace std::literals;
 

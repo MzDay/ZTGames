@@ -37,22 +37,32 @@ void Game::startup() {
 	program.useProgram();
 }
 
-void Game::update(double time) {
+void Game::update(double currentTime) {
 
 }
 
-void Game::render(double time) {
+void Game::render(double currentTime) {
+	static const GLfloat green[] = { 0.0f, 0.25f, 0.0f, 1.0f };
+	glClearBufferfv(GL_COLOR, 0, green);
+	glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);
 
-	float r = static_cast<float>(std::sin(time));
-	float g = static_cast<float>(std::cos(time));
-	float b = static_cast<float>(std::sin(time));
+	glUniformMatrix4fv(proj_location, 1, GL_FALSE, proj_matrix);
 
-	GLfloat black[] = { r, g, b, 0.0f };
-	glClearBufferfv(GL_COLOR, 0, black);
+#ifdef MANY_CUBES
+	
+	for (int i = 0; i < 24; ++i) {
+		float time = staic_cast<float>(i) + staic_cast<float>(currentTime) * 0.7f;
 
-	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	glBindVertexArray(0);
+		glm::mat4 location_matrix = glm::translate(0.0f, 0.0f, -10.0f);
+		glm::mat4 move_animaiton_matrix = glm::translate(
+			sinf(2.1f * time) * i,
+			cosf(1.7f * time) * i,
+			sinf(1.3f * time) * cosf(1.5f * time * i);
+	}
+
+#else
+
+#endif
 }
 
 void Game::userCallback() {
