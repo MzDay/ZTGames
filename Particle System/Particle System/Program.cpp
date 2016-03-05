@@ -54,6 +54,7 @@ void Program::addShader(std::initializer_list<Shader> shaderList)
 			OutputDebugStringA(infoLog);
 		}
 
+		glDetachShader(program, shaderID);
 		glDeleteShader(shaderID);
 	}
 }
