@@ -8,7 +8,7 @@ void Program::addShader(std::initializer_list<Shader> shaderList)
 		std::ifstream shaderFile;
 
 		shaderFile.exceptions(std::ifstream::badbit);
-
+		
 		try
 		{
 			shaderFile.open(shader.fileLocation);

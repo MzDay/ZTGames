@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <thread>
 #include "Program.h"
+#include <glm/glm.hpp>
 
 using namespace std::literals;
 
@@ -22,6 +23,12 @@ private:
 	GLuint buf;
 	GLuint vao;
 	Program program;
+
+	GLint           mv_location;
+	GLint           proj_location;
+
+	float           aspect;
+	glm::mat4       proj_matrix;
 };
 
 #endif

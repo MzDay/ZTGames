@@ -9,14 +9,58 @@ void Game::startup() {
 
 	program.addShader({ vertex, fragment });
 
+	mv_location = glGetUniformLocation(program.getProgram(), "mv_matrix");
+	proj_location = glGetUniformLocation(program.getProgram(), "proj_matrix");
+
 	static const GLfloat positions[] =
 	{
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f,
-		-0.5f, 0.25f, 0.0f,
-		0.5f, 0.25f, 0.0f,
-		0.0f,  -0.75f, 0.0f,
+		-0.25f,  0.25f, -0.25f,
+		-0.25f, -0.25f, -0.25f,
+		0.25f, -0.25f, -0.25f,
+
+		0.25f, -0.25f, -0.25f,
+		0.25f,  0.25f, -0.25f,
+		-0.25f,  0.25f, -0.25f,
+
+		0.25f, -0.25f, -0.25f,
+		0.25f, -0.25f,  0.25f,
+		0.25f,  0.25f, -0.25f,
+
+		0.25f, -0.25f,  0.25f,
+		0.25f,  0.25f,  0.25f,
+		0.25f,  0.25f, -0.25f,
+
+		0.25f, -0.25f,  0.25f,
+		-0.25f, -0.25f,  0.25f,
+		0.25f,  0.25f,  0.25f,
+
+		-0.25f, -0.25f,  0.25f,
+		-0.25f,  0.25f,  0.25f,
+		0.25f,  0.25f,  0.25f,
+
+		-0.25f, -0.25f,  0.25f,
+		-0.25f, -0.25f, -0.25f,
+		-0.25f,  0.25f,  0.25f,
+
+		-0.25f, -0.25f, -0.25f,
+		-0.25f,  0.25f, -0.25f,
+		-0.25f,  0.25f,  0.25f,
+
+		-0.25f, -0.25f,  0.25f,
+		0.25f, -0.25f,  0.25f,
+		0.25f, -0.25f, -0.25f,
+
+		0.25f, -0.25f, -0.25f,
+		-0.25f, -0.25f, -0.25f,
+		-0.25f, -0.25f,  0.25f,
+
+		-0.25f,  0.25f, -0.25f,
+		0.25f,  0.25f, -0.25f,
+		0.25f,  0.25f,  0.25f,
+
+		0.25f,  0.25f,  0.25f,
+		-0.25f,  0.25f,  0.25f,
+		-0.25f,  0.25f, -0.25f
 	};
 
 	glGenBuffers(1, &buf);
@@ -28,11 +72,14 @@ void Game::startup() {
 
 	glBindVertexArray(vao);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), reinterpret_cast<GLvoid*>(0));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(0);
+
+	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CW);
 
 	program.useProgram();
 }
