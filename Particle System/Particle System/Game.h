@@ -22,7 +22,7 @@ public:
 	void render(double) override;
 	void startup() override;
 	void shutdown() override;
-	void onResize(int, int);
+	void userWindowResizeCallback(int, int) override;
 	void userKeyCallback(int ,int) override;
 
 private:
