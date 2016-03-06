@@ -115,6 +115,8 @@ void Game::render(double currentTime)
 
 		glm::mat4 mv_matrix = location_matrix * move_animaiton_matrix * rotate_x_matrix * rotate_y_matrix * rotate_z_matrix;
 
+		mv_matrix *= camera_matrix;
+
 		glUniformMatrix4fv(mv_location, 1, GL_FALSE, glm::value_ptr(mv_matrix));
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -143,8 +145,20 @@ void Game::render(double currentTime)
 #endif
 }
 
-void Game::userCallback() {
+void Game::userKeyCallback(int key, int action) {
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+		camera_matrix += glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	}
+	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+		camera_matrix += glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	}
 
+	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+		camera_matrix += glm::vec4(0.0f, 2.0f, 0.0f, 0.0f);
+	}
+	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+		camera_matrix += glm::vec4(0.0f, -2.0f, 0.0f, 0.0f);
+	}
 }
 
 void Game::shutdown() {

@@ -17,12 +17,13 @@ using namespace std::literals;
 
 class Game : public Application {
 public:
+	Game() : camera_matrix() {}
 	void update(double) override;
 	void render(double) override;
 	void startup() override;
 	void shutdown() override;
-	void onResize(int w, int h);
-	void userCallback() override;
+	void onResize(int, int);
+	void userKeyCallback(int ,int) override;
 
 private:
 	GLuint buf;
@@ -34,6 +35,7 @@ private:
 
 	float           aspect;
 	glm::mat4       proj_matrix;
+	glm::mat4		camera_matrix;
 };
 
 #endif

@@ -19,7 +19,7 @@ public:
 	virtual void shutdown() = 0;
 	virtual void render(double) = 0;
 	virtual void update(double) = 0;
-	virtual void userCallback() = 0;
+	virtual void userKeyCallback(int, int) = 0;
 
 	void runApp() {
 		_startup();
@@ -58,6 +58,10 @@ private:
 	{
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, GL_TRUE);
+
+		Application* game = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+
+		game->userKeyCallback(key, action);
 	}
 
 	void _startup() {
@@ -76,6 +80,8 @@ private:
 			glfwTerminate();
 			exit(EXIT_FAILURE);
 		}
+
+		glfwSetWindowUserPointer(window, this);
 
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(1);
