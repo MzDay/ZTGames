@@ -113,9 +113,7 @@ void Game::render(double currentTime)
 		glm::mat4 rotate_y_matrix = glm::rotate(glm::radians((float)currentTime * 45.0f + i), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 rotate_z_matrix = glm::rotate(glm::radians((float)currentTime * 45.0f + i), glm::vec3(0.0f, 0.0f, 1.0f));
 
-		glm::mat4 mv_matrix = location_matrix * move_animaiton_matrix * rotate_x_matrix * rotate_y_matrix * rotate_z_matrix;
-
-		mv_matrix *= camera_matrix;
+		glm::mat4 mv_matrix = camera_matrix * move_animaiton_matrix * location_matrix ;
 
 		glUniformMatrix4fv(mv_location, 1, GL_FALSE, glm::value_ptr(mv_matrix));
 
@@ -132,11 +130,11 @@ void Game::render(double currentTime)
 		cosf(1.7f * time) * 0.5f,
 		sinf(1.3f * time) * cosf(1.5f * time) * 2.0f)));
 
-	glm::mat4 rotate_x_matrix = glm::rotate((float)currentTime * 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 rotate_y_matrix = glm::rotate((float)currentTime * 81.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotate_z_matrix = glm::rotate((float)currentTime * 81.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotate_y_matrix = glm::rotate(glm::radians((float)currentTime * 81.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::mat4 rotate_z_matrix = glm::rotate(glm::radians((float)currentTime * 81.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 rotate_x_matrix = glm::rotate(glm::radians((float)currentTime * 45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	glm::mat4 mv_matrix = location_matrix * move_animation_matrix * rotate_x_matrix * rotate_y_matrix * rotate_z_matrix;
+	glm::mat4 mv_matrix = camera_matrix * move_animation_matrix * location_matrix;
 
 	glUniformMatrix4fv(mv_location, 1, GL_FALSE, glm::value_ptr(mv_matrix));
 
@@ -146,18 +144,38 @@ void Game::render(double currentTime)
 }
 
 void Game::userKeyCallback(int key, int action) {
-	if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
-		camera_matrix += glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	if (key == GLFW_KEY_W ) {
+		camera_matrix *= glm::translate(glm::vec3(0.0f, 0.5f, 0.0f));
 	}
-	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
-		camera_matrix += glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	if (key == GLFW_KEY_S) {
+		camera_matrix *= glm::translate(glm::vec3(0.0f, -0.5f, 0.0f));
 	}
 
-	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
-		camera_matrix += glm::vec4(0.0f, 2.0f, 0.0f, 0.0f);
+	if (key == GLFW_KEY_D ) {
+		camera_matrix *= glm::translate(glm::vec3(0.5f, 0.0f, 0.0f));
 	}
-	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
-		camera_matrix += glm::vec4(0.0f, -2.0f, 0.0f, 0.0f);
+	if (key == GLFW_KEY_A) {
+		camera_matrix *= glm::translate(glm::vec3(-0.5f, 0.0f, 0.0f));
+	}
+
+	if (key == GLFW_KEY_EQUAL) {
+		camera_matrix *= glm::translate(glm::vec3(0.0f, 0.0f, 0.5));
+	}
+	if (key == GLFW_KEY_MINUS) {
+		camera_matrix *= glm::translate(glm::vec3(0.0f, 0.0f, -0.5));
+	}
+
+	if (key == GLFW_KEY_UP) {
+		camera_matrix *= glm::rotate(float(glm::radians(1.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+	if (key == GLFW_KEY_DOWN) {
+		camera_matrix *= glm::rotate(float(glm::radians(-1.0f)), glm::vec3(0.0f, 1.0f, 0.0f));
+	}
+	if (key == GLFW_KEY_LEFT) {
+		camera_matrix *= glm::rotate(float(glm::radians(-1.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
+	}
+	if (key == GLFW_KEY_RIGHT) {
+		camera_matrix *= glm::rotate(float(glm::radians(1.0f)), glm::vec3(1.0f, 0.0f, 0.0f));
 	}
 }
 
