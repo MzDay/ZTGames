@@ -109,9 +109,9 @@ void Game::render(double currentTime)
 			cosf(2.7f * time) * i,
 			sinf(1.3f * time) * cosf(1.5f * time * i)));
 
-		glm::mat4 rotate_x_matrix = glm::rotate((float)currentTime * 3.0f + i, glm::vec3(1.0f, 0.0f, 0.0f));
-		glm::mat4 rotate_y_matrix = glm::rotate((float)currentTime * 3.0f + i, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 rotate_z_matrix = glm::rotate((float)currentTime * 3.0f + i, glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::mat4 rotate_x_matrix = glm::rotate(glm::radians((float)currentTime * 45.0f + i), glm::vec3(1.0f, 0.0f, 0.0f));
+		glm::mat4 rotate_y_matrix = glm::rotate(glm::radians((float)currentTime * 45.0f + i), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 rotate_z_matrix = glm::rotate(glm::radians((float)currentTime * 45.0f + i), glm::vec3(0.0f, 0.0f, 1.0f));
 
 		glm::mat4 mv_matrix = location_matrix * move_animaiton_matrix * rotate_x_matrix * rotate_y_matrix * rotate_z_matrix;
 
