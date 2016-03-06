@@ -2,13 +2,15 @@
 
 void Program::addShader(std::initializer_list<Shader> shaderList)
 {
+	std::vector<GLuint> shaderIdList;
+
 	for (Shader shader : shaderList) {
 		GLuint shaderID;
 		std::string shaderCode;
 		std::ifstream shaderFile;
 
 		shaderFile.exceptions(std::ifstream::badbit);
-		
+	
 		try
 		{
 			shaderFile.open(shader.fileLocation);
@@ -32,6 +34,9 @@ void Program::addShader(std::initializer_list<Shader> shaderList)
 		glShaderSource(shaderID, 1, &shaderSource, nullptr);
 		glCompileShader(shaderID);
 
+		// Save this shader to delete later
+		shaderIdList.push_back(shaderID);
+
 		GLint success;
 		GLchar infoLog[512];
 
@@ -53,8 +58,10 @@ void Program::addShader(std::initializer_list<Shader> shaderList)
 			sprintf_s(infoLog, "ERROR::SHADER::PROGRAM::LINKING_FAILED\n %s", infoLog);
 			OutputDebugStringA(infoLog);
 		}
+	}
 
-		glDetachShader(program, shaderID);
-		glDeleteShader(shaderID);
+	for (auto shader : shaderIdList) {
+		glDetachShader(program, shader);
+		glDeleteShader(shader);
 	}
 }

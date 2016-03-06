@@ -1,6 +1,6 @@
 #include "Game.h"
 
-//#define MANY_CUBES
+#define MANY_CUBES
 
 void Game::startup() 
 {
@@ -80,8 +80,6 @@ void Game::startup()
 
 	glEnableVertexAttribArray(0);
 
-	glBindVertexArray(0);
-
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CW);
 
@@ -103,17 +101,17 @@ void Game::render(double currentTime)
 #ifdef MANY_CUBES
 
 	for (int i = 0; i < 24; ++i) {
-		float time = (float)(i) + (float)(currentTime) * 0.7f;
+		float time = (float)(i) + (float)(currentTime) * 0.3f;
 
 		glm::mat4 location_matrix = glm::translate(glm::vec3(0.0f, 0.0f, -10.0f));
 		glm::mat4 move_animaiton_matrix = glm::translate(glm::vec3(
 			sinf(2.1f * time) * i,
-			cosf(1.7f * time) * i,
+			cosf(2.7f * time) * i,
 			sinf(1.3f * time) * cosf(1.5f * time * i)));
 
-		glm::mat4 rotate_x_matrix = glm::rotate((float)currentTime * 45.0f + i, glm::vec3(0.0f, 1.0f, 0.0f));
-		glm::mat4 rotate_y_matrix = glm::rotate((float)currentTime * 45.0f + i, glm::vec3(1.0f, 0.0f, 0.0f));
-		glm::mat4 rotate_z_matrix = glm::rotate((float)currentTime * 45.0f + i, glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::mat4 rotate_x_matrix = glm::rotate((float)currentTime * 3.0f + i, glm::vec3(1.0f, 0.0f, 0.0f));
+		glm::mat4 rotate_y_matrix = glm::rotate((float)currentTime * 3.0f + i, glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 rotate_z_matrix = glm::rotate((float)currentTime * 3.0f + i, glm::vec3(0.0f, 0.0f, 1.0f));
 
 		glm::mat4 mv_matrix = location_matrix * move_animaiton_matrix * rotate_x_matrix * rotate_y_matrix * rotate_z_matrix;
 
@@ -156,5 +154,5 @@ void Game::shutdown() {
 void Game::onResize(int w, int h)
 {
 	aspect = (float)w / (float)h;
-	proj_matrix = glm::perspective(50.0f, aspect, 0.1f, 1000.0f);
+	proj_matrix = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
 }
