@@ -20,6 +20,7 @@ public:
 	virtual void render(double) = 0;
 	virtual void update(double) = 0;
 	virtual void userKeyCallback(int, int) = 0;
+	virtual void userWindowResizeCallback(int, int) {};
 
 	void runApp() {
 		_startup();
@@ -64,6 +65,12 @@ private:
 		game->userKeyCallback(key, action);
 	}
 
+	static void resize_callback(GLFWwindow* window, int w, int h) {
+		Application* game = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+
+		game->userWindowResizeCallback(w,h);
+	}
+
 	void _startup() {
 		glfwSetErrorCallback(error_callback);
 		if (!glfwInit())
@@ -86,6 +93,7 @@ private:
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(1);
 		glfwSetKeyCallback(window, key_callback);
+		glfwSetWindowSizeCallback(window, resize_callback);
 		
 		gl3wInit();
 

@@ -4,6 +4,9 @@
 
 void Game::startup() 
 {
+
+	userWindowResizeCallback(640, 480);
+
 	program.createProgram();
 
 	Shader vertex{ GL_VERTEX_SHADER, "vertex.glsl" };
@@ -13,8 +16,6 @@ void Game::startup()
 
 	mv_location = glGetUniformLocation(program.getProgram(), "mv_matrix");
 	proj_location = glGetUniformLocation(program.getProgram(), "proj_matrix");
-
-	onResize(500, 500);
 
 	static const GLfloat positions[] =
 	{
@@ -183,8 +184,10 @@ void Game::shutdown() {
 
 }
 
-void Game::onResize(int w, int h)
+void Game::userWindowResizeCallback(int w, int h)
 {
 	aspect = (float)w / (float)h;
 	proj_matrix = glm::perspective(45.0f, aspect, 0.1f, 1000.0f);
+
+	glViewport(0, 0, w, h);
 }
