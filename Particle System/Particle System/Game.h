@@ -7,7 +7,11 @@
 #include <iomanip>
 #include <thread>
 #include "Program.h"
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
 using namespace std::literals;
 
@@ -17,6 +21,7 @@ public:
 	void render(double) override;
 	void startup() override;
 	void shutdown() override;
+	void onResize(int w, int h);
 	void userCallback() override;
 
 private:
