@@ -80,8 +80,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)ThirdParty\include\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)ThirdParty\lib\SDL\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)ThirdParty\include\SDL\include;$(ProjectDir)ThirdParty\include\GLEW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)ThirdParty\lib\SDL\lib\x86;$(ProjectDir)ThirdParty\lib\GLEW\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
