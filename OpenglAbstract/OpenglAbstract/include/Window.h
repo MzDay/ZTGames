@@ -15,6 +15,7 @@ public:
 
 private:
 	SDL_Window* window;
+	SDL_GLContext context;
 };
 
 #endif
