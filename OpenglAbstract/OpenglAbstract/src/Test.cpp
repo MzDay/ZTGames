@@ -12,7 +12,8 @@ public:
 
 	}
 	void render(double t) {
-		auto a = 5;
+		const GLfloat green[] = { 0.0f, 0.25f, 0.0f, 1.0f };
+		glClearBufferfv(GL_COLOR, 0, green);
 	}
 	void update(double t) {
 

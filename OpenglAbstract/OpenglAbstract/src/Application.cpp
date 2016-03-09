@@ -20,15 +20,25 @@ void Application::run() {
 		// TODO: Error message for the user
 	}
 
+	if (glewInit()) {
+		// TODO: Throw an appropriate exception
+	}
+
 	startup();
 	
 	Timer timer;
 
-	while (!shouldQuit) {
-		// TODO: Add while loop for input class
+	SDL_Event e;
 
+	while (!shouldQuit) {
+		while (SDL_PollEvent(&e)) {
+
+		}
+		// TODO: Add while loop for input class
 		update(timer.getDelta());
 		render(timer.getDelta());
+
+		window->swapWindow();
 	}
 
 	shutdown();

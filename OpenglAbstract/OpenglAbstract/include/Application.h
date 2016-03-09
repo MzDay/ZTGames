@@ -2,6 +2,7 @@
 #define OA_APPLICATION_H
 
 #include <SDL.h>
+#include <GL\glew.h>
 #include <string>
 #include "Models\Size.h"
 #include "Window.h"
@@ -9,6 +10,7 @@
 
 #pragma comment(lib, "SDL2.lib")
 #pragma comment(lib, "SDL2main.lib")
+#pragma comment(lib, "glew32.lib")
 
 #undef main
 
