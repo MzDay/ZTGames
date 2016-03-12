@@ -31,12 +31,28 @@ namespace ngengine {
 			}
 		}
 
+		Size2D Application::getWindowSize()
+		{
+			return m_Window.getSize();
+		}
+
 		void Application::setTitle(const string& title) {
 			m_Window.setTitle(title);
 		}
 
 		std::tuple<double, double> Application::getMousePos() {
 			return m_Window.getMousePos();
+		}
+
+		std::tuple<double, double> Application::getNormalizedMousePos(Size2D windowSize)
+		{
+			double normalizedX, normalizedY;
+			std::tuple<double, double> mousePos = m_Window.getMousePos();
+			
+			normalizedX = -1.0 + 2.0 * std::get<0>(mousePos) / windowSize.width;
+			normalizedY = -(-1.0 + 2.0 * std::get<1>(mousePos) / windowSize.height);
+			
+			return std::make_tuple(normalizedX, normalizedY);
 		}
 
 		Application::~Application() {

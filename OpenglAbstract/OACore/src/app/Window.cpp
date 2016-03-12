@@ -41,6 +41,13 @@ namespace ngengine {
 			glfwSwapBuffers(m_Window);
 		}
 
+		utils::Size2D Window::getSize()
+		{
+			glfwGetWindowSize(m_Window, &m_Size.width, &m_Size.height);
+
+			return m_Size;
+		}
+
 		std::tuple<double, double> Window::getMousePos() {
 			double x,y;
 			glfwGetCursorPos(m_Window, &x, &y);

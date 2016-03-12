@@ -4,7 +4,6 @@
 #include <vector>
 #include "Program.h"
 
-
 using ngengine::utils::Size2D;
 
 class Game : public ngengine::app::Application
@@ -28,15 +27,11 @@ class Game : public ngengine::app::Application
 	void render(double time) {
 		static const GLfloat backcolor[] = { 1.0f , 1.0f, 1.0f, 1.0f };
 		const GLfloat color[] = { cos(time) + 0.5f, sin(time), cos(time), 1.0f };
-		const GLfloat position[] = { cos(time) , sin(time), cos(time), 1.0f };
+		//const GLfloat position[] = { cos(time) , sin(time), cos(time), 1.0f };
 		glClearBufferfv(GL_COLOR, 0, backcolor);
-
-		std::tuple<float, float> mousePos = getMousePos();
 		
-		
-
-		//const GLfloat position[] = { std::get<0>(mousePos) / getWindowSize().width, std::get<1>(mousePos) / getWindowSize().height };
-		//std::cout << position[0] << ", " << position[1] << std::endl;
+		std::tuple<float, float> mousePos = getNormalizedMousePos(getWindowSize());
+		const GLfloat position[] = { std::get<0>(mousePos), std::get<1>(mousePos)};
 
 		GLuint pos = glGetUniformLocation(program.getProgram(), "pos");
 		GLuint colorIndex = glGetUniformLocation(program.getProgram(), "color");

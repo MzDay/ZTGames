@@ -16,9 +16,9 @@ namespace ngengine {
 			void makeContext();
 			inline bool shouldClose() const { return glfwWindowShouldClose(m_Window) != 0; };
 			void updateWindow();
+			utils::Size2D getSize();
 
 		public:
-			inline utils::Size2D getSize() const { return m_Size; }
 			void setTitle(const std::string&);
 			std::tuple<double, double> getMousePos();
 
