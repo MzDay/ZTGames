@@ -27,7 +27,6 @@ class Game : public ngengine::app::Application
 	void render(double time) {
 		static const GLfloat backcolor[] = { 1.0f , 1.0f, 1.0f, 1.0f };
 		const GLfloat color[] = { cos(time) + 0.5f, sin(time), cos(time), 1.0f };
-		//const GLfloat position[] = { cos(time) , sin(time), cos(time), 1.0f };
 		glClearBufferfv(GL_COLOR, 0, backcolor);
 		
 		std::tuple<float, float> mousePos = getNormalizedMousePos(getWindowSize());
