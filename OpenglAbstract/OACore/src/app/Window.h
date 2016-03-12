@@ -20,6 +20,7 @@ namespace ngengine {
 		public:
 			inline utils::Size2D getSize() const { return m_Size; }
 			void setTitle(const std::string&);
+			std::tuple<double, double> getMousePos();
 
 		private:
 			static void _onResizeCallback(GLFWwindow*, int, int);

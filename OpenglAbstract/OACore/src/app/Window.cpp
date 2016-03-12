@@ -1,5 +1,6 @@
 #include "ngengine.h"
 #include "Window.h"
+
 namespace ngengine {
 	namespace app {
 
@@ -38,6 +39,12 @@ namespace ngengine {
 			glClear(GL_DEPTH);
 			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
+		}
+
+		std::tuple<double, double> Window::getMousePos() {
+			double x,y;
+			glfwGetCursorPos(m_Window, &x, &y);
+			return std::make_tuple(x, y);
 		}
 
 		void Window::_onResizeCallback(GLFWwindow* window, int width, int height) {

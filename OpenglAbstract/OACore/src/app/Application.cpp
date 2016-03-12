@@ -35,6 +35,10 @@ namespace ngengine {
 			m_Window.setTitle(title);
 		}
 
+		std::tuple<double, double> Application::getMousePos() {
+			return m_Window.getMousePos();
+		}
+
 		Application::~Application() {
 			// TODO: Delete every allocated memory
 			shutdown();

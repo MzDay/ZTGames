@@ -35,6 +35,7 @@ namespace ngengine {
 			inline const string& getTitle() const { return m_Title; }
 			inline const Size2D getWindowSize() const{ return m_Size; }
 			void setTitle(const string&);
+			std::tuple<double, double> getMousePos();
 
 		protected:
 			virtual void render(double) {};

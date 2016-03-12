@@ -1,33 +1,55 @@
-#include <iostream>
+﻿#include <iostream>
 #include "app\Application.h"
-#include "utils\Timer.h"
+#include "utils\Size.h"
+#include <vector>
+#include "Program.h"
+
+
+using ngengine::utils::Size2D;
 
 class Game : public ngengine::app::Application
 {
 	NG_ENGINE_BASE;
 
 	void startup() {
-		counter = 0;
-		prevTime = 0;
+		program.createProgram();
+		Shader vertex{ GL_VERTEX_SHADER, "vertex.glsl" };
+		Shader fragment{ GL_FRAGMENT_SHADER, "fragment.glsl" };
+		program.addShader({vertex, fragment});
+
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
 	}
 
 	void update(double) {
-		counter++;
-		if (timer.getPassedTime() - prevTime >= 1) {
-			setTitle("FPS: " + std::to_string(counter));
-			counter = 0;
-			prevTime = timer.getPassedTime();
-		}
+		
 	}
 
-	void render(double) {
-		static const GLfloat color[] = { 0.2f, 0.4f, 0.8f, 1.0f };
-		glClearBufferfv(GL_COLOR, 0, color);
+	void render(double time) {
+		static const GLfloat backcolor[] = { 1.0f , 1.0f, 1.0f, 1.0f };
+		const GLfloat color[] = { cos(time) + 0.5f, sin(time), cos(time), 1.0f };
+		const GLfloat position[] = { cos(time) , sin(time), cos(time), 1.0f };
+		glClearBufferfv(GL_COLOR, 0, backcolor);
+
+		std::tuple<float, float> mousePos = getMousePos();
+		
+		
+
+		//const GLfloat position[] = { std::get<0>(mousePos) / getWindowSize().width, std::get<1>(mousePos) / getWindowSize().height };
+		//std::cout << position[0] << ", " << position[1] << std::endl;
+
+		GLuint pos = glGetUniformLocation(program.getProgram(), "pos");
+		GLuint colorIndex = glGetUniformLocation(program.getProgram(), "color");
+
+		glUniform4fv(colorIndex, 1, color);
+		glUniform2fv(pos, 1, position);
+
+		glUseProgram(program.getProgram());
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
-	int counter;
-	int prevTime;
-	ngengine::utils::Timer timer;
+	GLuint vao;
+	Program program;
 };
 
 int main() {
