@@ -17,6 +17,8 @@ namespace ngengine {
 			inline bool shouldClose() const { return glfwWindowShouldClose(m_Window) != 0; };
 			void updateWindow();
 			utils::Size2D getSize();
+			void attachWindowPointer(void*);
+			void attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)>);
 
 		public:
 			void setTitle(const std::string&);

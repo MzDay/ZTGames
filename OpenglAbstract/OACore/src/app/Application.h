@@ -43,6 +43,10 @@ namespace ngengine {
 			virtual void update(double) {};
 			virtual void startup() {};
 			virtual void shutdown() {};
+			virtual void keyCallback(int, int) {}; // user Callback
+
+		private:
+			static void _keyCallback(GLFWwindow*, int, int, int, int);
 
 		private:
 			string m_Title;

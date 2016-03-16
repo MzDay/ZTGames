@@ -13,9 +13,6 @@ namespace ngengine {
 		}
 
 		void Window::createWindow() {
-			//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-			//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
 			m_Window = glfwCreateWindow(m_Size.width, m_Size.height, m_Title.c_str(), nullptr, nullptr);
 
 			glfwSetWindowUserPointer(m_Window, this);
@@ -46,6 +43,18 @@ namespace ngengine {
 			glfwGetWindowSize(m_Window, &m_Size.width, &m_Size.height);
 
 			return m_Size;
+		}
+
+		void Window::attachWindowPointer(void* ptr)
+		{
+			glfwSetWindowUserPointer(m_Window, ptr);
+		}
+
+		void Window::attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)> callback)
+		{
+			GLFWkeyfun* ptr = callback.target<GLFWkeyfun>();
+
+			glfwSetKeyCallback(m_Window, *ptr);
 		}
 
 		std::tuple<double, double> Window::getMousePos() {

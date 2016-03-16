@@ -16,6 +16,10 @@ namespace ngengine {
 		void Application::run(){
 			// Make the window context current
 			m_Window.makeContext();
+			m_Window.attachWindowPointer(this);
+
+			// Define the key callback for GLFW
+			m_Window.attachKeyCallback(_keyCallback);
 
 			if (glewInit() != GLEW_OK) {
 				std::cerr << "GLEW failed to init" << std::endl;
@@ -53,6 +57,13 @@ namespace ngengine {
 			normalizedY = -(-1.0 + 2.0 * std::get<1>(mousePos) / windowSize.height);
 			
 			return std::make_tuple(normalizedX, normalizedY);
+		}
+
+		// This is a static callback!
+		void Application::_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+		{
+			Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
+			app->keyCallback(key, action);
 		}
 
 		Application::~Application() {
