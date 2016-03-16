@@ -30,6 +30,8 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -72,7 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)src\Dependencies\GLFW\include;$(ProjectDir)src\Dependencies\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)Dependencies\GLFW\lib;$(ProjectDir)Dependencies\GLEW\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)../OACore-bin</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -97,15 +99,19 @@
       <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ngengine.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
       <AdditionalOptions>glew32s.lib glfw3.lib opengl32.lib %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Window.cpp" />
+    <ClCompile Include="src\graphics\Program.cpp" />
     <ClCompile Include="src\ngengine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ngengine.h</PrecompiledHeaderFile>
@@ -166,6 +173,9 @@
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\Window.h" />
+    <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\graphics\Program.h" />
+    <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\ngengine.h" />
     <ClInclude Include="src\utils\Size.h" />
     <ClInclude Include="src\utils\Timer.h" />
