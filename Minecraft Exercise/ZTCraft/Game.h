@@ -1,4 +1,5 @@
 #pragma once
+
 #include "app\Application.h"
 #include "graphics\Program.h"
 #include "glm\glm.hpp"
@@ -6,6 +7,7 @@
 #include "glm\gtc\type_ptr.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 #include <array>
+#include "Pyramid.h"
 
 using ngengine::app::Application;
 using ngengine::graphics::Program;
@@ -19,6 +21,7 @@ public:
 	void startup() override;
 	void shutdown() override;
 	void keyCallback(int, int) override;
+	void mouseCallback(double, double) override;
 
 private:
 	Program program;
@@ -29,6 +32,14 @@ private:
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
 	glm::vec3 cameraUp;
+	GLfloat cameraYaw;
+	GLfloat cameraPitch;
+	GLboolean firstMouse;
 
-	std::array<bool, 1024> keys;
+	GLdouble mouseLastX;
+	GLdouble mouseLastY;
+
+	Pyramid pyramid;
+
+	std::array<bool, 1024> keysState;
 };

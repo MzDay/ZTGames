@@ -25,25 +25,23 @@ void Game::startup() {
 	Shader fragment = { GL_FRAGMENT_SHADER, "fragment.glsl" };
 	program.addShader({ vertex, fragment });
 
-
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
 	glGenBuffers(1, &ebo);
 
 	glBindVertexArray(vao);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
-		glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
+	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(0);
 
 	glEnable(GL_DEPTH_TEST);
-
 
 	// Camera init
 	cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -51,11 +49,33 @@ void Game::startup() {
 	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	// Init keys
-	keys = { false };
+	keysState = { false };
+
+	mouseLastX = getWindowSize().width / 2;
+	mouseLastY = getWindowSize().height / 2;
+	firstMouse = true;
+
+	cameraYaw = -90.0f;
+	cameraPitch = 0.0f;
+
+	pyramid.updateSize(15);
 }
 
 void Game::update(double time) {
+	GLfloat cameraSpeed = 0.25f;
 
+	if (keysState[GLFW_KEY_W])
+		cameraPos += cameraSpeed * cameraFront;
+	if (keysState[GLFW_KEY_S])
+		cameraPos -= cameraSpeed * cameraFront;
+	if (keysState[GLFW_KEY_A])
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	if (keysState[GLFW_KEY_D])
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	if (keysState[GLFW_KEY_EQUAL])
+		pyramid.updateSize(pyramid.getSize() + 2);
+	if (keysState[GLFW_KEY_MINUS])
+		pyramid.updateSize(pyramid.getSize() - 2);
 }
 
 void Game::render(double time) {
@@ -63,26 +83,9 @@ void Game::render(double time) {
 	glClearBufferfv(GL_COLOR, 0, backColor);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	static const  glm::vec3 cubePositions[] = {
-		glm::vec3(0.0f,  0.0f,  0.0f),
-		glm::vec3(2.0f,  5.0f, -15.0f),
-		glm::vec3(-1.5f, -2.2f, -2.5f),
-		glm::vec3(-3.8f, -2.0f, -12.3f),
-		glm::vec3(2.4f, -0.4f, -3.5f),
-		glm::vec3(-1.7f,  3.0f, -7.5f),
-		glm::vec3(1.3f, -2.0f, -2.5f),
-		glm::vec3(1.5f,  2.0f, -2.5f),
-		glm::vec3(1.5f,  0.2f, -1.5f),
-		glm::vec3(-1.3f,  1.0f, -1.5f)
-	};
-
 	glm::mat4 model;
 	glm::mat4 view;
 	glm::mat4 projection;
-
-	GLfloat radius = 10.0f;
-	GLfloat camX = sin(time) * radius;
-	GLfloat camZ = cos(time) * radius;
 
 	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
@@ -97,37 +100,62 @@ void Game::render(double time) {
 
 	program.useProgram();
 	glBindVertexArray(vao);
-	for (GLuint i = 0; i < 10; i++)
-	{
-		glm::mat4 model;
-        model = glm::translate(model, cubePositions[i]);
-        GLfloat angle = 20.0f * i;
-        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	for (int i = 0; i < pyramid.getSize(); i++) {
+		for (int j = 0; j < pyramid.getSize(); j++)
+		{
+			glm::mat4 model;
+			model = glm::translate(model, pyramid.pyramidPosition[i][j]);
+			//GLfloat angle = 20.0f * i;
+			//model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		glDrawElements(GL_TRIANGLE_STRIP, 36, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLE_STRIP, 36, GL_UNSIGNED_INT, 0);
+		}
 	}
 	glBindVertexArray(0);
 }
 
 void Game::shutdown() {
-	
+
 }
 
 void Game::keyCallback(int key, int action) {
-	GLfloat cameraSpeed = 0.01f;
 
 	if (action == GLFW_PRESS)
-		keys[key] = true;
-	else if(action == GLFW_RELEASE)
-		keys[key] = false;
+		keysState[key] = true;
+	else if (action == GLFW_RELEASE)
+		keysState[key] = false;
+}
 
-	if (keys[GLFW_KEY_W])
-		cameraPos += cameraSpeed * cameraFront;
-	if (keys[GLFW_KEY_S])
-		cameraPos -= cameraSpeed * cameraFront;
-	if (keys[GLFW_KEY_A])
-		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
-	if (keys[GLFW_KEY_D])
-		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+void Game::mouseCallback(double xPos, double yPos)
+{
+	if (firstMouse)
+	{
+		mouseLastX = xPos;
+		mouseLastY = yPos;
+		firstMouse = false;
+	}
+
+	GLfloat xOffset = xPos - mouseLastX;
+	GLfloat yOffset = mouseLastY - yPos; // Reversed since y-coordinates range from bottom to top
+	mouseLastX = xPos;
+	mouseLastY = yPos;
+
+	GLfloat sensitivity = 0.05f;
+	xOffset *= sensitivity;
+	yOffset *= sensitivity;
+
+	cameraYaw += xOffset;
+	cameraPitch += yOffset;
+
+	if (cameraPitch > 89.0f)
+		cameraPitch = 89.0f;
+	if (cameraPitch < -89.0f)
+		cameraPitch = -89.0f;
+
+	glm::vec3 front;
+	front.x = cos(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+	front.y = sin(glm::radians(cameraPitch));
+	front.z = sin(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
+	cameraFront = glm::normalize(front);
 }
