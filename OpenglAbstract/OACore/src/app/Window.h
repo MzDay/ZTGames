@@ -3,6 +3,7 @@
 #include "utils\Size.h"
 #include "Dependencies\GLEW\include\GL\glew.h"
 #include "Dependencies\GLFW\include\GLFW\glfw3.h"
+#include "input\Input.h"
 
 namespace ngengine {
 	namespace app {
@@ -14,23 +15,26 @@ namespace ngengine {
 		public:
 			void createWindow();
 			void makeContext();
-			inline bool shouldClose() const { return glfwWindowShouldClose(m_Window) != 0; };
+			inline bool shouldClose() const { return glfwWindowShouldClose(windowHandler) != 0; };
 			void updateWindow();
+			void showWindow();
 			utils::Size2D getSize();
-			void attachWindowPointer(void*);
-			void attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)>);
 
 		public:
+			inline std::string getTitle() const { return windowTitle; }
+			inline utils::Size2D getSize() const { return windowSize; }
 			void setTitle(const std::string&);
-			std::tuple<double, double> getMousePos();
 
 		private:
 			static void _onResizeCallback(GLFWwindow*, int, int);
 
 		private:
-			std::string m_Title;
-			utils::Size2D m_Size;
-			GLFWwindow* m_Window;
+			std::string windowTitle;
+			utils::Size2D windowSize;
+			GLFWwindow* windowHandler;
+
+		public:
+			input::Input input;
 		};
 	}
 }

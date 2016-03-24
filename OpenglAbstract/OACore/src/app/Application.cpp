@@ -3,67 +3,35 @@
 
 namespace ngengine {
 	namespace app{
-		Application::Application(const string& title, const Size2D size) : 
-			m_Title(title), m_Size(size), m_Window(title, size){
+		Application::Application(const string& title, const Size2D size) : window(title, size){
 			if (!glfwInit()) {
 				//TODO: Log error
 				std::cerr << "GLFW failed to init" << std::endl;
 			}
 
-			m_Window.createWindow();
-		}
+			window.createWindow();
 
-		void Application::run(){
 			// Make the window context current
-			m_Window.makeContext();
-			m_Window.attachWindowPointer(this);
+			window.makeContext();
 
-			// Define the key callback for GLFW
-			m_Window.attachKeyCallback(_keyCallback);
-
+			// We initialize the GLEW to make opengl function work
 			if (glewInit() != GLEW_OK) {
 				std::cerr << "GLEW failed to init" << std::endl;
 			}
+		}
 
+		void Application::run(){
+			window.showWindow();
+
+			// Use the startup function that the user defined (if he had)
 			startup();
 
-			while (!m_Window.shouldClose()) {
+			while (!window.shouldClose()) {
 				update(glfwGetTime());
 				render(glfwGetTime());
 
-				m_Window.updateWindow();
+				window.updateWindow();
 			}
-		}
-
-		Size2D Application::getWindowSize()
-		{
-			return m_Window.getSize();
-		}
-
-		void Application::setTitle(const string& title) {
-			m_Window.setTitle(title);
-		}
-
-		std::tuple<double, double> Application::getMousePos() {
-			return m_Window.getMousePos();
-		}
-
-		std::tuple<double, double> Application::getNormalizedMousePos(Size2D windowSize)
-		{
-			double normalizedX, normalizedY;
-			std::tuple<double, double> mousePos = m_Window.getMousePos();
-			
-			normalizedX = -1.0 + 2.0 * std::get<0>(mousePos) / windowSize.width;
-			normalizedY = -(-1.0 + 2.0 * std::get<1>(mousePos) / windowSize.height);
-			
-			return std::make_tuple(normalizedX, normalizedY);
-		}
-
-		// This is a static callback!
-		void Application::_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
-		{
-			Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
-			app->keyCallback(key, action);
 		}
 
 		Application::~Application() {

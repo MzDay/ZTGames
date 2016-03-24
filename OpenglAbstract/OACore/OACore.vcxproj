@@ -176,9 +176,12 @@
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\graphics\Program.h" />
     <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\input\Input.h" />
     <ClInclude Include="src\ngengine.h" />
+    <ClInclude Include="src\utils\Position.h" />
     <ClInclude Include="src\utils\Size.h" />
     <ClInclude Include="src\utils\Timer.h" />
+    <ClInclude Include="src\ztengine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

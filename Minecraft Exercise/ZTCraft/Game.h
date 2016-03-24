@@ -1,4 +1,5 @@
 #pragma once
+
 #include "app\Application.h"
 #include "graphics\Program.h"
 #include "glm\glm.hpp"
@@ -6,6 +7,7 @@
 #include "glm\gtc\type_ptr.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 #include <array>
+#include "Pyramid.h"
 
 using ngengine::app::Application;
 using ngengine::graphics::Program;
@@ -13,22 +15,28 @@ using ngengine::graphics::Shader;
 
 class Game : public Application {
 	using Application::Application;
+
+public:
+	Game(std::string& title) : Application(title),
+		vbo(GL_ARRAY_BUFFER),
+		ebo(GL_ELEMENT_ARRAY_BUFFR)
+
 public:
 	void render(double) override;
 	void update(double) override;
 	void startup() override;
 	void shutdown() override;
-	void keyCallback(int, int) override;
 
 private:
 	Program program;
-	GLuint vao;
-	GLuint vbo;
-	GLuint ebo;
 
-	glm::vec3 cameraPos;
-	glm::vec3 cameraFront;
-	glm::vec3 cameraUp;
+	VertexArrayObject vao;
+	Buffer vbo;
+	Buffer ebo;
 
-	std::array<bool, 1024> keys;
+	Camera camera;
+
+	Pyramid pyramid;
+
+	InputHandler* input;
 };

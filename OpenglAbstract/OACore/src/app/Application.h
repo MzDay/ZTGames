@@ -26,32 +26,23 @@ namespace ngengine {
 			explicit Application(const Size2D size) : Application(DEFAULT_TITLE, size) {}
 			explicit Application(int width, int height) : Application(DEFAULT_TITLE, Size2D{ width, height }) {}
 			explicit Application() : Application(DEFAULT_TITLE, DEFAULT_SIZE) {}
-			~Application();
+
+			// We put final here because we dont want the user to override the detor
+			// because he has the shutdown for that
+			// TODO: Check if this is bad practice.
+			virtual ~Application() final;
 
 		public:
 			virtual void run() final;
-			
-		public:
-			inline const string& getTitle() const { return m_Title; }
-			Size2D getWindowSize();
-			void setTitle(const string&);
-			std::tuple<double, double> getMousePos();
-			std::tuple<double, double> getNormalizedMousePos(Size2D windowSize);
 
 		protected:
 			virtual void render(double) {};
 			virtual void update(double) {};
 			virtual void startup() {};
 			virtual void shutdown() {};
-			virtual void keyCallback(int, int) {}; // user Callback
 
-		private:
-			static void _keyCallback(GLFWwindow*, int, int, int, int);
-
-		private:
-			string m_Title;
-			Size2D m_Size;
-			Window m_Window;
+		public:
+			Window window;
 		};
 	}
 }

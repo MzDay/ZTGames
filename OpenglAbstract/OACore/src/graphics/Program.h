@@ -9,11 +9,10 @@ namespace ngengine {
 		class Program
 		{
 		public:
-			Program() {};
+			Program() : program(glCreateProgram()) {};
 			~Program() { glDeleteProgram(program); }
-			inline void createProgram() { program = glCreateProgram(); }
 			GLuint getProgram() { return program; }
-			void useProgram() { glUseProgram(program); }
+			inline void useProgram() { glUseProgram(program); }
 			void addShader(std::initializer_list<Shader>);
 		private:
 			Program& operator=(const Program&) = delete;
