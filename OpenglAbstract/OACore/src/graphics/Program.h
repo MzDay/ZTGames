@@ -17,7 +17,10 @@ namespace ngengine {
 			GLuint getProgram() { return program; }
 			inline void useProgram() { glUseProgram(program); }
 			void addShader(Shader shader);
-			void addShaders(std::initializer_list<Shader> shaderList);
+			void addShader(std::initializer_list<Shader> shaderList);
+
+		public:
+			GLint getUniformLocation(std::string name);
 
 		private:
 			Program& operator=(const Program&) = delete;

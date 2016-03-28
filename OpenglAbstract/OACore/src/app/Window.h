@@ -3,7 +3,6 @@
 #include "utils\Size.h"
 #include "Dependencies\GLEW\include\GL\glew.h"
 #include "Dependencies\GLFW\include\GLFW\glfw3.h"
-#include "input\Input.h"
 
 namespace ngengine {
 	namespace app {
@@ -32,9 +31,6 @@ namespace ngengine {
 			std::string windowTitle;
 			utils::Size2D windowSize;
 			GLFWwindow* windowHandler;
-
-		public:
-			input::Input input;
 		};
 	}
 }

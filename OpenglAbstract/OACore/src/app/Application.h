@@ -27,10 +27,7 @@ namespace ngengine {
 			Application(int width, int height) : Application(DEFAULT_TITLE, Size2D{ width, height }) {}
 			Application() : Application(DEFAULT_TITLE, DEFAULT_SIZE) {}
 
-			// We put final here because we dont want the user to override the detor
-			// because he has the shutdown for that
-			// TODO: Check if this is bad practice.
-			virtual ~Application() final;
+			virtual ~Application();
 
 		public:
 			virtual void run() final;

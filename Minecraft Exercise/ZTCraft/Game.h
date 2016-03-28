@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app\Application.h"
+#include "ztengine.h"
 #include "graphics\Program.h"
 #include "glm\glm.hpp"
 #include "glm\gtx\transform.hpp"
@@ -12,6 +12,9 @@
 using ngengine::app::Application;
 using ngengine::graphics::Program;
 using ngengine::graphics::Shader;
+using ngengine::render::Buffer;
+using ngengine::render::VertexArray;
+using ngengine::scene::Camera;
 
 class Game : public Application {
 	using Application::Application;
@@ -19,7 +22,7 @@ class Game : public Application {
 public:
 	Game(std::string& title) : Application(title),
 		vbo(GL_ARRAY_BUFFER),
-		ebo(GL_ELEMENT_ARRAY_BUFFR)
+		ebo(GL_ELEMENT_ARRAY_BUFFER) {}
 
 public:
 	void render(double) override;
@@ -30,7 +33,7 @@ public:
 private:
 	Program program;
 
-	VertexArrayObject vao;
+	VertexArray vao;
 	Buffer vbo;
 	Buffer ebo;
 
@@ -38,5 +41,5 @@ private:
 
 	Pyramid pyramid;
 
-	InputHandler* input;
+	//InputHandler* input;
 };

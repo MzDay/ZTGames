@@ -61,11 +61,15 @@ namespace ngengine {
 			glDeleteShader(shaderID);
 		}
 
-		void Program::addShaders(std::initializer_list<Shader> shaderList)
+		void Program::addShader(std::initializer_list<Shader> shaderList)
 		{
 			for (Shader shader : shaderList) {
 				addShader(shader);
 			}
+		}
+		GLint Program::getUniformLocation(std::string name)
+		{
+			return glGetUniformLocation(program, name.c_str());
 		}
 	}
 }

@@ -183,7 +183,6 @@
     <ClInclude Include="src\Dependencies\GLFW\include\GLFW\glfw3native.h" />
     <ClInclude Include="src\graphics\Program.h" />
     <ClInclude Include="src\graphics\Shader.h" />
-    <ClInclude Include="src\input\Input.h" />
     <ClInclude Include="src\ngengine.h" />
     <ClInclude Include="src\scene\Camera.h" />
     <ClInclude Include="src\utils\Direction.h" />

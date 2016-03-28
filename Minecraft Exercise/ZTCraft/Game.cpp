@@ -20,43 +20,36 @@ void Game::startup() {
 		0, 1
 	};
 
-	program.createProgram(); // ?
 	Shader vertex = { GL_VERTEX_SHADER, "vertex.glsl" };
 	Shader fragment = { GL_FRAGMENT_SHADER, "fragment.glsl" };
 	program.addShader({ vertex, fragment });
 
 	// OPTION #1
 	vao.bind();
-	vbo.setData(positions, GL_STATIC_DRAW);
-	ebo.setData(indices, GL_STATIC_DRAW);
-	vao.setPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
+	vbo.setData(positions, GL_STATIC_DRAW, sizeof(positions));
+	ebo.setData(indices, GL_STATIC_DRAW, sizeof(indices));
+	vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
 	vao.unbind();
 
 	// OPTION #2
-	vao.load([]() {
+	/*vao.load([]() {
 		vbo.setData(positions, GL_STATIC_DRAW);
 		ebo.setData(indices, GL_STATIC_DRAW);
 		vao.setPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
-	});
+	});*/
 
 	glEnable(GL_DEPTH_TEST);
 
-	camera.setPosition(glm::vec3(...));
-	camera.setFront(glm::vec3(...));
-
-	// Optional
-	camera.setUp(glm::vec3(...));
-
 	pyramid.updateSize(15);
 
-	input = getWindow().getInput();
+	//input = getWindow().getInput();
 }
 
 void Game::update(double time) {
 	GLfloat cameraSpeed = 0.25f;
 
-	if (input.keyPressed(GLFW_KEY_W))
-		camera.changePos(camera.getPos() + cameraSpeed * camera.getFront());
+	//if (input.keyPressed(GLFW_KEY_W))
+	//	camera.changePos(camera.getPos() + cameraSpeed * camera.getFront());
 }
 
 void Game::render(double time) {
@@ -70,16 +63,19 @@ void Game::render(double time) {
 
 	view = camera.getLookAt();
 
-	projection = glm::perspective(glm::radians(45.0f), static_cast<GLfloat>(getWindowSize().width) / static_cast<GLfloat>(getWindowSize().height), 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), 640.0f /  480.0f, 0.1f, 100.0f);
 
-	GLint viewLoc = program.getUnifromLocation("view");
-	GLint projLoc = ...;
-	GLint modelLoc = ...;
+	GLint viewLoc = program.getUniformLocation("view");
+	GLint projLoc = program.getUniformLocation("projection");
+	GLint modelLoc = program.getUniformLocation("model");
 
 	// OPTION #1
-	program.setUniform(viewLoc, glm::value_ptr(view));
+	//program.setUniform(viewLoc, glm::value_ptr(view));
 	// OPTION #2
-	program.setUniform(viewLoc, view);
+	//program.setUniform(viewLoc, view);
+
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 	program.useProgram();
 	vao.bind();
@@ -89,7 +85,7 @@ void Game::render(double time) {
 		{
 			glm::mat4 model;
 			model = glm::translate(model, pyramid.pyramidPosition[i][j]);
-			program.setUniform(modelLoc, model);
+			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 			glDrawElements(GL_TRIANGLE_STRIP, 36, GL_UNSIGNED_INT, 0);
 		}
