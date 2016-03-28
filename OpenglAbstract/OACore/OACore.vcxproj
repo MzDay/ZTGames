@@ -169,7 +169,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ngengine.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\scene\Camera.cpp" />
+    <ClCompile Include="src\render\buffer\Buffer.cpp" />
+    <ClCompile Include="src\render\buffer\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />
@@ -187,15 +188,12 @@
     <ClInclude Include="src\scene\Camera.h" />
     <ClInclude Include="src\utils\Direction.h" />
     <ClInclude Include="src\utils\Orientation.h" />
+    <ClInclude Include="src\render\buffer\Buffer.h" />
+    <ClInclude Include="src\render\buffer\VertexArray.h" />
     <ClInclude Include="src\utils\Position.h" />
     <ClInclude Include="src\utils\Size.h" />
     <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="src\ztengine.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Dependencies\GLEW\lib\glew32.lib" />
-    <Library Include="Dependencies\GLEW\lib\glew32s.lib" />
-    <Library Include="Dependencies\GLFW\lib\glfw3.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

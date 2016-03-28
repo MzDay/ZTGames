@@ -24,10 +24,13 @@
     <ClCompile Include="src\app\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\scene\Camera.cpp">
+    <ClCompile Include="src\graphics\Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\Program.cpp">
+    <ClCompile Include="src\render\buffer\Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\buffer\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,10 +92,11 @@
     <ClInclude Include="src\graphics\Program.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Dependencies\GLEW\lib\glew32.lib" />
-    <Library Include="Dependencies\GLEW\lib\glew32s.lib" />
-    <Library Include="Dependencies\GLFW\lib\glfw3.lib" />
+    <ClInclude Include="src\render\buffer\Buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\buffer\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
