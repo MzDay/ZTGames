@@ -35,7 +35,7 @@ namespace ngengine {
 			utils::Orientation getOrientation() const;
 
 		private:
-			glm::vec3 updateFront();
+			void updateFront();
 
 		private:
 			glm::mat4 lookAt;

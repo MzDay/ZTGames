@@ -118,7 +118,7 @@ namespace ngengine {
 
 #pragma region Private Methods
 
-		glm::vec3 Camera::updateFront()
+		void Camera::updateFront()
 		{
 			glm::vec3 cameraFront;
 			cameraFront.x = cos(glm::radians(orientation.yaw)) * cos(glm::radians(orientation.pitch));
