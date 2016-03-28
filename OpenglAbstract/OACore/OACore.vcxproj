@@ -169,6 +169,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ngengine.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\render\buffer\Buffer.cpp" />
+    <ClCompile Include="src\render\buffer\VertexArray.cpp" />
+    <ClCompile Include="src\render\buffer\VertexArrayObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />
@@ -178,10 +181,13 @@
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\input\Input.h" />
     <ClInclude Include="src\ngengine.h" />
+    <ClInclude Include="src\render\buffer\Buffer.h" />
+    <ClInclude Include="src\render\buffer\VertexArray.h" />
     <ClInclude Include="src\utils\Position.h" />
     <ClInclude Include="src\utils\Size.h" />
     <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="src\ztengine.h" />
+    <ClInclude Include="src\render\buffer\VertexArrayObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

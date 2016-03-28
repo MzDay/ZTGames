@@ -20,12 +20,12 @@ namespace ngengine {
 
 		class Application {
 		public:
-			explicit Application(const string&, const Size2D);
-			explicit Application(const string& title, int width, int height) : Application(title, Size2D{ width, height }) {}
-			explicit Application(const string& title) : Application(title, DEFAULT_SIZE) {}
-			explicit Application(const Size2D size) : Application(DEFAULT_TITLE, size) {}
-			explicit Application(int width, int height) : Application(DEFAULT_TITLE, Size2D{ width, height }) {}
-			explicit Application() : Application(DEFAULT_TITLE, DEFAULT_SIZE) {}
+			Application(const string&, const Size2D);
+			Application(const string& title, int width, int height) : Application(title, Size2D{ width, height }) {}
+			Application(const string& title) : Application(title, DEFAULT_SIZE) {}
+			Application(const Size2D size) : Application(DEFAULT_TITLE, size) {}
+			Application(int width, int height) : Application(DEFAULT_TITLE, Size2D{ width, height }) {}
+			Application() : Application(DEFAULT_TITLE, DEFAULT_SIZE) {}
 
 			// We put final here because we dont want the user to override the detor
 			// because he has the shutdown for that
