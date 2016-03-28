@@ -171,6 +171,7 @@
     </ClCompile>
     <ClCompile Include="src\render\buffer\Buffer.cpp" />
     <ClCompile Include="src\render\buffer\VertexArray.cpp" />
+    <ClCompile Include="src\scene\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />

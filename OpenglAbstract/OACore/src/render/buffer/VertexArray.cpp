@@ -4,7 +4,7 @@
 namespace ngengine {
 	namespace render {
 
-		VertexArray::VertexArray()
+		VertexArray::VertexArray() : bindToVAO(false)
 		{
 			glGenVertexArrays(1, &vaoHandler);
 		}
@@ -22,7 +22,7 @@ namespace ngengine {
 		}
 
 		void VertexArray::unbind(){
-			if(!bindToVAO)
+			if(bindToVAO)
 			{
 				bindToVAO = false;
 				glBindVertexArray(0);

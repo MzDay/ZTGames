@@ -22,7 +22,7 @@ namespace ngengine {
 			return bufferUsage;
 		}
 
-		inline void Buffer::setData(const GLvoid * data, GLenum usage, GLsizeiptr sizeInBytes)
+		void Buffer::setData(const GLvoid * data, GLenum usage, GLsizeiptr sizeInBytes)
 		{
 			glBindBuffer(bufferTarget, bufferHandler);
 			glBufferData(bufferTarget, sizeInBytes, data, usage);

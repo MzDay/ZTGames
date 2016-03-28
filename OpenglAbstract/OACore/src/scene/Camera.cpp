@@ -124,7 +124,7 @@ namespace ngengine {
 			cameraFront.x = cos(glm::radians(orientation.yaw)) * cos(glm::radians(orientation.pitch));
 			cameraFront.y = sin(glm::radians(orientation.pitch));
 			cameraFront.z = sin(glm::radians(orientation.yaw)) * cos(glm::radians(orientation.pitch));
-			front = cameraFront;
+			front = glm::normalize(cameraFront);
 		}
 
 #pragma endregion

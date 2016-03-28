@@ -61,6 +61,9 @@ void Game::render(double time) {
 	glm::mat4 view;
 	glm::mat4 projection;
 
+	camera.setPosition(glm::vec3(0.0f, 0.0f, -3.0f));
+	camera.update();
+
 	view = camera.getLookAt();
 
 	projection = glm::perspective(glm::radians(45.0f), 640.0f /  480.0f, 0.1f, 100.0f);
