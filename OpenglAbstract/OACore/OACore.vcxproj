@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)../Resources/Libs/glm-master/glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ngengine.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -169,19 +169,33 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ngengine.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\scene\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\Window.h" />
     <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\Dependencies\GLEW\include\GL\glew.h" />
+    <ClInclude Include="src\Dependencies\GLEW\include\GL\glxew.h" />
+    <ClInclude Include="src\Dependencies\GLEW\include\GL\wglew.h" />
+    <ClInclude Include="src\Dependencies\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="src\Dependencies\GLFW\include\GLFW\glfw3native.h" />
     <ClInclude Include="src\graphics\Program.h" />
     <ClInclude Include="src\graphics\Shader.h" />
     <ClInclude Include="src\input\Input.h" />
     <ClInclude Include="src\ngengine.h" />
+    <ClInclude Include="src\scene\Camera.h" />
+    <ClInclude Include="src\utils\Direction.h" />
+    <ClInclude Include="src\utils\Orientation.h" />
     <ClInclude Include="src\utils\Position.h" />
     <ClInclude Include="src\utils\Size.h" />
     <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="src\ztengine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dependencies\GLEW\lib\glew32.lib" />
+    <Library Include="Dependencies\GLEW\lib\glew32s.lib" />
+    <Library Include="Dependencies\GLFW\lib\glfw3.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
