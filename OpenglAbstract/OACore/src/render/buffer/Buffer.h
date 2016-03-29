@@ -11,15 +11,15 @@ namespace ngengine {
 			Buffer& operator = (const Buffer&) = delete;
 			Buffer& operator = (Buffer&&) = delete;
 
-			Buffer() {}
-			Buffer(GLenum newBufferTarget) : bufferTarget(newBufferTarget) {}
+			Buffer() { glGenBuffers(1, &bufferHandler); }
+			Buffer(GLenum newBufferTarget) : bufferTarget(newBufferTarget){ glGenBuffers(1, &bufferHandler); }
 			~Buffer();
 
 		public:
 			GLuint getHandler() const;
 			GLenum getTarget() const;
 			GLenum getUsage() const;
-			inline void setTarget(GLenum newBufferTarget) { bufferTarget = newBufferTarget; }
+			void setTarget(GLenum newBufferTarget);
 
 			void setData(const GLvoid* data, GLenum usage, GLsizeiptr sizeInBytes);
 

@@ -5,6 +5,7 @@ namespace ngengine {
 	namespace render {
 		Buffer::~Buffer()
 		{
+			glDeleteBuffers(1, &bufferHandler);
 		}
 
 		GLuint ngengine::render::Buffer::getHandler() const
@@ -22,11 +23,20 @@ namespace ngengine {
 			return bufferUsage;
 		}
 
+		void Buffer::setTarget(GLenum newBufferTarget)
+		{
+			bufferTarget = newBufferTarget;
+		}
+
 		void Buffer::setData(const GLvoid * data, GLenum usage, GLsizeiptr sizeInBytes)
 		{
+			if(bufferTarget == 0)
+			{
+				// TODO: Throw error because the user didn't declare any target
+				throw std::exception("Didn't declare target");
+			}
 			glBindBuffer(bufferTarget, bufferHandler);
 			glBufferData(bufferTarget, sizeInBytes, data, usage);
-			glBindBuffer(bufferTarget, 0);
 		}
 	}
 }

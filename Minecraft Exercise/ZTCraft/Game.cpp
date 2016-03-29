@@ -61,7 +61,7 @@ void Game::render(double time) {
 	glm::mat4 view;
 	glm::mat4 projection;
 
-	camera.setPosition(glm::vec3(0.0f, 0.0f, -3.0f));
+	camera.setPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	camera.update();
 
 	view = camera.getLookAt();

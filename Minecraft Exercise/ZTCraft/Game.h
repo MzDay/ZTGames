@@ -17,10 +17,8 @@ using ngengine::render::VertexArray;
 using ngengine::scene::Camera;
 
 class Game : public Application {
-	using Application::Application;
-
 public:
-	Game(std::string& title) : Application(title),
+	Game(const std::string& title) : Application(title),
 		vbo(GL_ARRAY_BUFFER),
 		ebo(GL_ELEMENT_ARRAY_BUFFER) {}
 
