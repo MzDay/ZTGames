@@ -21,7 +21,7 @@ namespace ngengine {
 			GLenum getUsage() const;
 			void setTarget(GLenum newBufferTarget);
 
-			void setData(const GLvoid* data, GLenum usage, GLsizeiptr sizeInBytes);
+			void setData(const GLvoid* data, GLsizeiptr sizeInBytes, GLenum usage);
 
 		private:
 			GLenum bufferTarget;
