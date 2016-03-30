@@ -38,6 +38,4 @@ private:
 	Camera camera;
 
 	Pyramid pyramid;
-
-	//InputHandler* input;
 };

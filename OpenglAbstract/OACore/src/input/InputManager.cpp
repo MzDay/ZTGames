@@ -8,23 +8,22 @@ namespace ngengine {
 		{
 		}
 
-		InputManager::InputManager(Window parentWindow)
-		{
+		void InputManager::setWindow(Window&& parentWindow) {
 			window = &parentWindow;
 
-			GLFWkeyfun* ptr = ((std::function<void(GLFWwindow*, int, int, int, int)>)keyboardCallback).target<GLFWkeyfun>();
+			glfwSetWindowUserPointer(window->getHandler(), this);
 
-			glfwSetKeyCallback(window->windowHandler, *ptr);
+			glfwSetKeyCallback(window->getHandler(), keyboardCallback);
 		}
 
 		Pos2D InputManager::getMousePosition()
 		{
-			return mouse.getMousePosition(window->windowHandler);
+			return mouse.getMousePosition(window->getHandler());
 		}
 
 		Pos2D InputManager::getNormalizedMousePosition()
 		{
-			return mouse.getNormalizedMousePosition(window->windowHandler, window->getSize());
+			return mouse.getNormalizedMousePosition(window->getHandler(), window->getSize());
 		}
 
 		KeyState InputManager::getKeyState(int keyIdentifier)

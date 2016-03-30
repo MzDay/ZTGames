@@ -13,11 +13,12 @@ namespace ngengine {
 
 		class InputManager
 		{
-
 		public:
 			InputManager();
-			InputManager(Window parentWindow);
 			~InputManager();
+
+		public:
+			void setWindow(Window&& window);
 
 		public:
 			Pos2D getMousePosition();

@@ -9,7 +9,7 @@ namespace ngengine {
 			return keysState[keyIdentifier];
 		}
 
-		KeyState Keyboard::setKeyState(int keyIdentifier, KeyState keyState)
+		void Keyboard::setKeyState(int keyIdentifier, KeyState keyState)
 		{
 			keysState[keyIdentifier] = keyState;
 		}

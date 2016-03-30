@@ -14,12 +14,12 @@ namespace ngengine {
 			// Make the window context current
 			window.makeContext();
 
-			inputManager = InputManager(window);
-
 			// We initialize the GLEW to make opengl function work
 			if (glewInit() != GLEW_OK) {
 				std::cerr << "GLEW failed to init" << std::endl;
 			}
+
+			inputManager.setWindow(std::move(window));
 		}
 
 		void Application::run(){

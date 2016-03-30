@@ -48,6 +48,9 @@ void Game::startup() {
 void Game::update(double time) {
 	GLfloat cameraSpeed = 0.25f;
 
+	if (inputManager.getKeyState(GLFW_KEY_A) == ngengine::input::KeyState::Pressed) {
+		std::cout << "WOOOOOOOOOOW" << std::endl;
+	}
 	//if (input.keyPressed(GLFW_KEY_W))
 	//	camera.changePos(camera.getPos() + cameraSpeed * camera.getFront());
 }

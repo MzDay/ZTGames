@@ -7,3 +7,5 @@
 #include <fstream>
 #include <vector>
 #include <functional>
+#include <array>
+#include <memory>

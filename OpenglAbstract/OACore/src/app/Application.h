@@ -13,6 +13,7 @@ namespace ngengine {
 	namespace app {
 
 		using utils::Size2D;
+		using input::InputManager;
 		using std::string;
 
 		constexpr Size2D DEFAULT_SIZE = Size2D({ 640, 480 });

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <array>
 #include "Dependencies\GLEW\include\GL\glew.h"
 #include "Dependencies\GLFW\include\GLFW\glfw3.h"
 
@@ -16,12 +15,12 @@ namespace ngengine {
 		class Keyboard
 		{
 		public:
-			inline Keyboard() { keysState = { KeyState::Released }; };
+			Keyboard() : keysState{ KeyState::Released } { };
 			~Keyboard();
 
 		public:
 			KeyState getKeyState(int keyIdentifier);
-			KeyState setKeyState(int keyIdentifier, KeyState keyState);
+			void setKeyState(int keyIdentifier, KeyState keyState);
 
 		private:
 			void keyboardUpdateCallback(int keyIdentifier, unsigned int glfwAction);
