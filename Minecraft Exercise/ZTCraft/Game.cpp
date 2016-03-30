@@ -26,15 +26,15 @@ void Game::startup() {
 
 	// OPTION #1
 	vao.bind();
-	vbo.setData(positions, GL_STATIC_DRAW, sizeof(positions));
-	ebo.setData(indices, GL_STATIC_DRAW, sizeof(indices));
+	vbo.setData(positions, sizeof(positions),GL_STATIC_DRAW);
+	ebo.setData(indices, sizeof(indices),GL_STATIC_DRAW);
 	vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
 	vao.unbind();
 
 	// OPTION #2
-	/*vao.load([]() {
-		vbo.setData(positions, GL_STATIC_DRAW);
-		ebo.setData(indices, GL_STATIC_DRAW);
+	/*vao.load([&]() {
+		vbo.setData(positions, sizeof(positions), GL_STATIC_DRAW);
+		ebo.setData(indices, sizeof(indices), GL_STATIC_DRAW);
 		vao.setPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
 	});*/
 

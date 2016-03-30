@@ -28,7 +28,7 @@ namespace ngengine {
 			bufferTarget = newBufferTarget;
 		}
 
-		void Buffer::setData(const GLvoid * data, GLenum usage, GLsizeiptr sizeInBytes)
+		void Buffer::setData(const GLvoid * data, GLsizeiptr sizeInBytes, GLenum usage)
 		{
 			if(bufferTarget == 0)
 			{
