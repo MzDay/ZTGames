@@ -5,7 +5,7 @@ namespace ngengine {
 	namespace app {
 
 		Window::Window(const std::string& title, utils::Size2D size) :
-			windowTitle(title), windowSize(size){
+			windowTitle(title), windowSize(size) {
 		}
 
 		Window::~Window() {
@@ -46,9 +46,16 @@ namespace ngengine {
 
 		utils::Size2D Window::getSize()
 		{
-			glfwGetWindowSize(windowHandler, &windowSize.width, &windowSize.height);
+			glfwGetWindowSize(windowHandler, &(windowSize.width), &windowSize.height);
 
 			return windowSize;
+		}
+
+		void Window::attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)> callback)
+		{
+			GLFWkeyfun* ptr = callback.target<GLFWkeyfun>();
+
+			glfwSetKeyCallback(windowHandler, *ptr);
 		}
 
 		void Window::_onResizeCallback(GLFWwindow* window, int width, int height) {

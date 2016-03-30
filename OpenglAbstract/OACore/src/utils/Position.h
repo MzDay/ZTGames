@@ -3,18 +3,18 @@
 namespace ngengine {
 	namespace utils {
 		struct Pos1D {
-			int width;
+			double x;
 		};
 
 		struct Pos2D {
-			int width;
-			int height;
+			double x;
+			double y;
 		};
 
 		struct Pos3D {
-			int width;
-			int height;
-			int depth;
+			double x;
+			double y;
+			double z;
 		};
 	}
 }

@@ -3,6 +3,7 @@
 #include "ngengine.h"
 #include "utils\Size.h"
 #include "Window.h"
+#include "input\InputManager.h"
 #include "Dependencies\GLEW\include\GL\glew.h"
 #include "Dependencies\GLFW\include\GLFW\glfw3.h"
 
@@ -40,6 +41,7 @@ namespace ngengine {
 
 		public:
 			Window window;
+			InputManager inputManager;
 		};
 	}
 }

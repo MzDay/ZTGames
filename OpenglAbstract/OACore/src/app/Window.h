@@ -1,16 +1,21 @@
 #pragma once
 
 #include "utils\Size.h"
+#include "input\InputManager.h"
 #include "Dependencies\GLEW\include\GL\glew.h"
 #include "Dependencies\GLFW\include\GLFW\glfw3.h"
 
 namespace ngengine {
 	namespace app {
+
 		class Window {
+
+			friend class InputManager;
+
 		public:
 			Window(const std::string&, utils::Size2D);
 			~Window();
-			
+
 		public:
 			void createWindow();
 			void makeContext();
@@ -26,6 +31,7 @@ namespace ngengine {
 
 		private:
 			static void _onResizeCallback(GLFWwindow*, int, int);
+			void attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)> callback);
 
 		private:
 			std::string windowTitle;
