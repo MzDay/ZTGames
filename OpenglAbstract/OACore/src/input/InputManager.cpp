@@ -38,7 +38,7 @@ namespace ngengine {
 
 		void InputManager::keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 		{
-			KeyState keyState = (action == GLFW_PRESS) ? KeyState::Pressed : KeyState::Released;
+			KeyState keyState = (action == GLFW_RELEASE) ? KeyState::Released : KeyState::Pressed;
 
 			InputManager* inputManager = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
 			inputManager->setKeyState(key, keyState);

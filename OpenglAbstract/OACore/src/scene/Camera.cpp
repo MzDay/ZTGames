@@ -114,6 +114,18 @@ namespace ngengine {
 			updateFront();
 		}
 
+		void Camera::addToPosition(glm::vec3 positionOffset)
+		{
+			position += positionOffset;
+		}
+
+		void Camera::addToPositionRelativeToCameraFront(glm::vec3 positionOffset)
+		{
+			position += positionOffset.z * front;
+			position += positionOffset.y * up;
+			position += positionOffset.x * glm::normalize(glm::cross(front, up));
+		}
+
 #pragma endregion
 
 #pragma region Private Methods

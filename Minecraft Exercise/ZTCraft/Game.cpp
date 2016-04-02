@@ -26,8 +26,8 @@ void Game::startup() {
 
 	// OPTION #1
 	vao.bind();
-	vbo.setData(positions, sizeof(positions),GL_STATIC_DRAW);
-	ebo.setData(indices, sizeof(indices),GL_STATIC_DRAW);
+	vbo.setData(positions, sizeof(positions), GL_STATIC_DRAW);
+	ebo.setData(indices, sizeof(indices), GL_STATIC_DRAW);
 	vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
 	vao.unbind();
 
@@ -48,11 +48,24 @@ void Game::startup() {
 void Game::update(double time) {
 	GLfloat cameraSpeed = 0.25f;
 
-	if (inputManager.getKeyState(GLFW_KEY_A) == ngengine::input::KeyState::Pressed) {
-		std::cout << "WOOOOOOOOOOW" << std::endl;
+	if (inputManager.getKeyState(GLFW_KEY_W) == ngengine::input::KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, 0.2f));
 	}
-	//if (input.keyPressed(GLFW_KEY_W))
-	//	camera.changePos(camera.getPos() + cameraSpeed * camera.getFront());
+	if (inputManager.getKeyState(GLFW_KEY_S) == ngengine::input::KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, -0.2f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_D) == ngengine::input::KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.2f, 0.0f, 0.0f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_A) == ngengine::input::KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(-0.2f, 0.0f, 0.0f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_SPACE) == ngengine::input::KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.2f, 0.0f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_LEFT_SHIFT) == ngengine::input::KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, -0.2f, 0.0f));
+	}
 }
 
 void Game::render(double time) {
@@ -64,12 +77,11 @@ void Game::render(double time) {
 	glm::mat4 view;
 	glm::mat4 projection;
 
-	camera.setPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	camera.update();
 
 	view = camera.getLookAt();
 
-	projection = glm::perspective(glm::radians(45.0f), 640.0f /  480.0f, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 100.0f);
 
 	GLint viewLoc = program.getUniformLocation("view");
 	GLint projLoc = program.getUniformLocation("projection");

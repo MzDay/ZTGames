@@ -21,6 +21,8 @@ namespace ngengine {
 			void addToYawInRange(float yawOffset, float maxYaw, float minYaw);
 			void addToPitch(float pitchOffset);
 			void addToPitchInRange(float pitchOffset, float maxPitch, float minPitch);
+			void addToPosition(glm::vec3 positionOffset);
+			void addToPositionRelativeToCameraFront(glm::vec3 positionOffset);
 
 			void setPosition(glm::vec3 cameraPosition);
 			void setUp(glm::vec3 cameraUp);

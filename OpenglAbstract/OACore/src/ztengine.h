@@ -1,6 +1,5 @@
 #pragma once
 
-
 // App
 #include "app\Application.h"
 #include "app\Window.h"
