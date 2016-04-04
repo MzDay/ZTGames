@@ -20,11 +20,11 @@ void Game::startup() {
 		0, 1
 	};
 
-	program.createProgram();
 	Shader vertex = { GL_VERTEX_SHADER, "vertex.glsl" };
 	Shader fragment = { GL_FRAGMENT_SHADER, "fragment.glsl" };
 	program.addShader({ vertex, fragment });
 
+<<<<<<< HEAD
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
 	glGenBuffers(1, &ebo);
@@ -58,10 +58,21 @@ void Game::startup() {
 	cameraYaw = -90.0f;
 	cameraPitch = 0.0f;
 
+=======
+	vao.bind();
+	vbo.setData(positions, sizeof(positions), GL_STATIC_DRAW);
+	ebo.setData(indices, sizeof(indices), GL_STATIC_DRAW);
+	vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
+	vao.unbind();
+
+	glEnable(GL_DEPTH_TEST);
+
+>>>>>>> Dev
 	pyramid.updateSize(15);
 }
 
 void Game::update(double time) {
+<<<<<<< HEAD
 	GLfloat cameraSpeed = 0.25f;
 
 	if (keysState[GLFW_KEY_W])
@@ -76,6 +87,28 @@ void Game::update(double time) {
 		pyramid.updateSize(pyramid.getSize() + 2);
 	if (keysState[GLFW_KEY_MINUS])
 		pyramid.updateSize(pyramid.getSize() - 2);
+=======
+	using ngengine::input::KeyState;
+
+	if (inputManager.getKeyState(GLFW_KEY_W) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, 0.02f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_S) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, -0.02f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_D) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.02f, 0.0f, 0.0f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_A) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(-0.02f, 0.0f, 0.0f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_SPACE) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.02f, 0.0f));
+	}
+	if (inputManager.getKeyState(GLFW_KEY_LEFT_SHIFT) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, -0.02f, 0.0f));
+	}
+>>>>>>> Dev
 }
 
 void Game::render(double time) {
@@ -87,35 +120,56 @@ void Game::render(double time) {
 	glm::mat4 view;
 	glm::mat4 projection;
 
+<<<<<<< HEAD
 	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+=======
+	camera.update();
 
-	projection = glm::perspective(glm::radians(45.0f), static_cast<GLfloat>(getWindowSize().width) / static_cast<GLfloat>(getWindowSize().height), 0.1f, 100.0f);
+	view = camera.getLookAt();
+>>>>>>> Dev
 
-	GLint viewLoc = glGetUniformLocation(program.getProgram(), "view");
-	GLint projLoc = glGetUniformLocation(program.getProgram(), "projection");
-	GLint modelLoc = glGetUniformLocation(program.getProgram(), "model");
+	projection = glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 100.0f);
+
+	GLint viewLoc = program.getUniformLocation("view");
+	GLint projLoc = program.getUniformLocation("projection");
+	GLint modelLoc = program.getUniformLocation("model");
+
+	// OPTION #1
+	//program.setUniform(viewLoc, glm::value_ptr(view));
+	// OPTION #2
+	//program.setUniform(viewLoc, view);
 
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 	program.useProgram();
+<<<<<<< HEAD
 	glBindVertexArray(vao);
+=======
+	vao.bind();
+
+>>>>>>> Dev
 	for (int i = 0; i < pyramid.getSize(); i++) {
 		for (int j = 0; j < pyramid.getSize(); j++)
 		{
 			glm::mat4 model;
 			model = glm::translate(model, pyramid.pyramidPosition[i][j]);
+<<<<<<< HEAD
 			//GLfloat angle = 20.0f * i;
 			//model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+=======
+>>>>>>> Dev
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 			glDrawElements(GL_TRIANGLE_STRIP, 36, GL_UNSIGNED_INT, 0);
 		}
 	}
-	glBindVertexArray(0);
+
+	vao.unbind();
 }
 
 void Game::shutdown() {
+<<<<<<< HEAD
 
 }
 
@@ -159,3 +213,7 @@ void Game::mouseCallback(double xPos, double yPos)
 	front.z = sin(glm::radians(cameraYaw)) * cos(glm::radians(cameraPitch));
 	cameraFront = glm::normalize(front);
 }
+=======
+
+}
+>>>>>>> Dev

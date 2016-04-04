@@ -1,5 +1,5 @@
-#ifndef PROGRAM_H
-#define PROGRAM_H
+#ifndef PROGRAH
+#define PROGRAH
 
 #include "app\Application.h"
 #include "Shader.h"

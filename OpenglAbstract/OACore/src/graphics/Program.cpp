@@ -3,6 +3,7 @@
 
 namespace ngengine {
 	namespace graphics {
+
 		void Program::addShader(std::initializer_list<Shader> shaderList)
 		{
 			std::vector<GLuint> shaderIdList;
@@ -37,8 +38,7 @@ namespace ngengine {
 				glShaderSource(shaderID, 1, &shaderSource, nullptr);
 				glCompileShader(shaderID);
 
-				// Save this shader to delete later
-				shaderIdList.push_back(shaderID);
+				shaderIdList.emplace_back(shaderID);
 
 				GLint success;
 				GLchar infoLog[512];
@@ -63,10 +63,15 @@ namespace ngengine {
 				}
 			}
 
-			for (auto shader : shaderIdList) {
-				glDetachShader(program, shader);
-				glDeleteShader(shader);
+			for (auto shaderID : shaderIdList) {
+				glDetachShader(program, shaderID);
+				glDeleteShader(shaderID);
 			}
+		}
+
+		GLint Program::getUniformLocation(std::string name)
+		{
+			return glGetUniformLocation(program, name.c_str());
 		}
 	}
 }

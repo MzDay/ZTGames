@@ -40,5 +40,6 @@
     <None Include="fragment.glsl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

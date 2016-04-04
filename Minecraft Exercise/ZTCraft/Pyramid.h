@@ -8,7 +8,11 @@ class Pyramid
 {
 	typedef std::vector<glm::vec3> Row;
 	typedef std::vector<Row> Matrix;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> Dev
 public:
 	Pyramid();
 	Pyramid(int);

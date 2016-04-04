@@ -6,31 +6,34 @@
 
 namespace ngengine {
 	namespace app {
+
 		class Window {
 		public:
 			Window(const std::string&, utils::Size2D);
 			~Window();
-			
+
 		public:
 			void createWindow();
 			void makeContext();
-			inline bool shouldClose() const { return glfwWindowShouldClose(m_Window) != 0; };
+			inline bool shouldClose() const { return glfwWindowShouldClose(windowHandler) != 0; };
 			void updateWindow();
-			utils::Size2D getSize();
-			void attachWindowPointer(void*);
-			void attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)>);
-
+			void showWindow();
 		public:
+			GLFWwindow* getHandler() const { return windowHandler; }
+
+			utils::Size2D getSize();
+
+			inline std::string getTitle() const { return windowTitle; }
 			void setTitle(const std::string&);
-			std::tuple<double, double> getMousePos();
 
 		private:
-			static void _onResizeCallback(GLFWwindow*, int, int);
+			static void onResizeCallback(GLFWwindow*, int, int);
+			void attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)> callback);
 
 		private:
-			std::string m_Title;
-			utils::Size2D m_Size;
-			GLFWwindow* m_Window;
+			std::string windowTitle;
+			utils::Size2D windowSize;
+			GLFWwindow* windowHandler;
 		};
 	}
 }

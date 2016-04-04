@@ -74,9 +74,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)src\Dependencies\GLFW\include;$(ProjectDir)src\Dependencies\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)Dependencies\GLFW\lib;$(ProjectDir)Dependencies\GLEW\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)../OACore-bin</OutDir>
-    <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
+    <OutDir>$(SolutionDir)../OACore-bin/</OutDir>
+    <IntDir>$(SolutionDir)bin/$(Configuration)/Intermediates/</IntDir>
     <TargetExt>.lib</TargetExt>
+    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(IncludePath)</IncludePath>
@@ -96,11 +98,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)../Resources/Libs/glm-master/glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>ngengine.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -165,22 +168,55 @@
     <ClCompile Include="src\app\Application.cpp" />
     <ClCompile Include="src\app\Window.cpp" />
     <ClCompile Include="src\graphics\Program.cpp" />
+    <ClCompile Include="src\input\InputManager.cpp" />
+    <ClCompile Include="src\input\Keyboard.cpp" />
+    <ClCompile Include="src\input\Mouse.cpp" />
     <ClCompile Include="src\ngengine.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ngengine.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\render\buffer\Buffer.cpp" />
+    <ClCompile Include="src\render\buffer\VertexArray.cpp" />
+    <ClCompile Include="src\scene\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\input\InputManager.h" />
     <ClInclude Include="src\app\Application.h" />
     <ClInclude Include="src\app\Window.h" />
     <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\Dependencies\GLEW\include\GL\glew.h" />
+    <ClInclude Include="src\Dependencies\GLEW\include\GL\glxew.h" />
+    <ClInclude Include="src\Dependencies\GLEW\include\GL\wglew.h" />
+    <ClInclude Include="src\Dependencies\GLFW\include\GLFW\glfw3.h" />
+    <ClInclude Include="src\Dependencies\GLFW\include\GLFW\glfw3native.h" />
     <ClInclude Include="src\graphics\Program.h" />
     <ClInclude Include="src\graphics\Shader.h" />
+    <ClInclude Include="src\input\Keyboard.h" />
+    <ClInclude Include="src\input\Mouse.h" />
     <ClInclude Include="src\ngengine.h" />
+    <ClInclude Include="src\scene\Camera.h" />
+    <ClInclude Include="src\utils\Direction.h" />
+    <ClInclude Include="src\utils\Orientation.h" />
+    <ClInclude Include="src\render\buffer\Buffer.h" />
+    <ClInclude Include="src\render\buffer\VertexArray.h" />
+    <ClInclude Include="src\utils\Position.h" />
     <ClInclude Include="src\utils\Size.h" />
     <ClInclude Include="src\utils\Timer.h" />
+    <ClInclude Include="src\ztengine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
+    <Import Project="..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets" Condition="Exists('..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets'))" />
+  </Target>
 </Project>

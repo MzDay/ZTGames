@@ -28,6 +28,7 @@ int Pyramid::getSize()
 
 void Pyramid::fillMatrix(int size)
 {
+<<<<<<< HEAD
 	for (size_t i = 0; i < pyramidSize; ++i)
 	{
 		Row row(pyramidSize);
@@ -35,6 +36,15 @@ void Pyramid::fillMatrix(int size)
 		for (size_t j = 0; j < pyramidSize; ++j)
 		{
 			row[j] = getCellValue(i,j);
+=======
+	for (int i = 0; i < pyramidSize; ++i)
+	{
+		Row row(pyramidSize);
+
+		for (int j = 0; j < pyramidSize; ++j)
+		{
+			row[j] = getCellValue(i, j);
+>>>>>>> Dev
 		}
 
 		pyramidPosition.push_back(row);
@@ -43,7 +53,11 @@ void Pyramid::fillMatrix(int size)
 
 glm::vec3 Pyramid::getCellValue(int x, int z)
 {
+<<<<<<< HEAD
 	return glm::vec3(x, getYPosition(x,z), z - 20.0f);
+=======
+	return glm::vec3(x, getYPosition(x, z), z - 20.0f);
+>>>>>>> Dev
 }
 
 double Pyramid::getYPosition(int x, int z)
