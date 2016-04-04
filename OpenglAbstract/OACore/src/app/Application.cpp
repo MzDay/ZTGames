@@ -29,8 +29,8 @@ namespace ngengine {
 			startup();
 
 			while (!window.shouldClose()) {
-				update(glfwGetTime());
-				render(glfwGetTime());
+				update(timer.getDelta());
+				render(timer.getDelta());
 
 				window.updateWindow();
 			}

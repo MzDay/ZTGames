@@ -2,6 +2,7 @@
 
 #include "ngengine.h"
 #include "utils\Size.h"
+#include "utils\Timer.h"
 #include "Window.h"
 #include "input\InputManager.h"
 #include "Dependencies\GLEW\include\GL\glew.h"
@@ -15,6 +16,7 @@ namespace ngengine {
 		using utils::Size2D;
 		using input::InputManager;
 		using std::string;
+		using utils::Timer;
 
 		constexpr Size2D DEFAULT_SIZE = Size2D({ 640, 480 });
 
@@ -43,6 +45,9 @@ namespace ngengine {
 		public:
 			Window window;
 			InputManager inputManager;
+
+		private:
+			 Timer timer;
 		};
 	}
 }

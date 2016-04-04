@@ -35,30 +35,31 @@ void Game::startup() {
 	pyramid.updateSize(15);
 }
 
-void Game::update(double time) {
+void Game::update(double delta) {
+
 	using ngengine::input::KeyState;
 
 	if (inputManager.getKeyState(GLFW_KEY_W) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, 0.02f));
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, 0.2f * delta));
 	}
 	if (inputManager.getKeyState(GLFW_KEY_S) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, -0.02f));
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, -0.2f * delta));
 	}
 	if (inputManager.getKeyState(GLFW_KEY_D) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.02f, 0.0f, 0.0f));
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.2f * delta, 0.0f, 0.0f));
 	}
 	if (inputManager.getKeyState(GLFW_KEY_A) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(-0.02f, 0.0f, 0.0f));
+		camera.addToPositionRelativeToCameraFront(glm::vec3(-0.2f * delta, 0.0f, 0.0f));
 	}
 	if (inputManager.getKeyState(GLFW_KEY_SPACE) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.02f, 0.0f));
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.2f * delta, 0.0f));
 	}
 	if (inputManager.getKeyState(GLFW_KEY_LEFT_SHIFT) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, -0.02f, 0.0f));
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, -0.2f * delta, 0.0f));
 	}
 }
 
-void Game::render(double time) {
+void Game::render(double delta) {
 	static const GLfloat backColor[] = { 0.2f, 0.3f, 0.5f, 1.0f };
 	glClearBufferfv(GL_COLOR, 0, backColor);
 	glClear(GL_DEPTH_BUFFER_BIT);

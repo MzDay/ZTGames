@@ -21,7 +21,7 @@ namespace ngengine {
 			{
 				auto timeCurrent = high_resolution_clock::now();
 
-				duration< double > delta(timeCurrent - timePrev);
+				duration<float, std::milli> delta(timeCurrent - timePrev);
 
 				timePrev = high_resolution_clock::now();
 
