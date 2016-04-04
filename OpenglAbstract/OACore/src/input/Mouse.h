@@ -19,6 +19,7 @@ namespace ngengine {
 		public:
 			Pos2D getMousePosition(GLFWwindow* window);
 			Pos2D getNormalizedMousePosition(GLFWwindow* window, Size2D windowSize);
+			void mouseCallback(double x, double y);
 		};
 	}
 }

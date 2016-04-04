@@ -5,7 +5,7 @@ namespace ngengine {
 	namespace app {
 
 		Window::Window(const std::string& title, utils::Size2D size) :
-			windowTitle(title), windowSize(size) {
+			windowTitle(title), windowSize(size), windowHandler(nullptr){
 		}
 
 		Window::~Window() {
@@ -18,7 +18,7 @@ namespace ngengine {
 			// First hide the window
 			glfwHideWindow(windowHandler);
 
-			glfwSetWindowSizeCallback(windowHandler, _onResizeCallback);
+			glfwSetWindowSizeCallback(windowHandler, onResizeCallback);
 		}
 
 		void Window::showWindow() {
@@ -58,7 +58,7 @@ namespace ngengine {
 			glfwSetKeyCallback(windowHandler, *ptr);
 		}
 
-		void Window::_onResizeCallback(GLFWwindow* window, int width, int height) {
+		void Window::onResizeCallback(GLFWwindow* window, int width, int height) {
 			// TODO: Maybe give the user access to know when the window has changed by using glfwGetWindowUserPointer to (this)
 			glViewport(0, 0, width, height);
 		}

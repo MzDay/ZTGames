@@ -5,7 +5,6 @@
 
 namespace ngengine {
 	namespace input {
-
 		enum class KeyState: unsigned int
 		{
 			Pressed = GLFW_PRESS,
@@ -19,11 +18,8 @@ namespace ngengine {
 			~Keyboard();
 
 		public:
-			KeyState getKeyState(int keyIdentifier);
-			void setKeyState(int keyIdentifier, KeyState keyState);
-
-		private:
-			void keyboardUpdateCallback(int keyIdentifier, unsigned int glfwAction);
+			KeyState getKeyState(int keyIdentifier) const;
+			void keyboardCallback(int keyIdentifier, int action);
 
 		private:
 			std::array<KeyState, 1024> keysState;

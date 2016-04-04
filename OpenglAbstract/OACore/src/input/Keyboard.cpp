@@ -4,20 +4,15 @@
 namespace ngengine {
 	namespace input {
 
-		KeyState Keyboard::getKeyState(int keyIdentifier)
+		KeyState Keyboard::getKeyState(int keyIdentifier) const
 		{
 			return keysState[keyIdentifier];
 		}
 
-		void Keyboard::setKeyState(int keyIdentifier, KeyState keyState)
+		void Keyboard::keyboardCallback(int keyIdentifier, int action)
 		{
+			KeyState keyState = (action == GLFW_RELEASE) ? KeyState::Released : KeyState::Pressed;
 			keysState[keyIdentifier] = keyState;
-		}
-
-		void Keyboard::keyboardUpdateCallback(int keyIdentifier, unsigned int glfwAction)
-		{
-			// TODO: check how to remove the cast
-			keysState[keyIdentifier] = static_cast<KeyState> (glfwAction);
 		}
 
 		Keyboard::~Keyboard()

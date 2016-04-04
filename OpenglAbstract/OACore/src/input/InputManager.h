@@ -24,10 +24,10 @@ namespace ngengine {
 			Pos2D getMousePosition();
 			Pos2D getNormalizedMousePosition();
 			KeyState getKeyState(int keyIdentifier);
-			void setKeyState(int keyIdentifier, KeyState keyState);
 
 		private:
 			static void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+			static void mouseCallback(GLFWwindow* window, double x, double y);
 
 		private:
 			Window* window;

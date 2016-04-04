@@ -21,3 +21,6 @@
 
 // Scene
 #include "scene\Camera.h"
+
+// Input
+#include "input\InputManager.h"

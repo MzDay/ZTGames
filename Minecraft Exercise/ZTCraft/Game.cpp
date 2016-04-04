@@ -24,47 +24,37 @@ void Game::startup() {
 	Shader fragment = { GL_FRAGMENT_SHADER, "fragment.glsl" };
 	program.addShader({ vertex, fragment });
 
-	// OPTION #1
 	vao.bind();
 	vbo.setData(positions, sizeof(positions), GL_STATIC_DRAW);
 	ebo.setData(indices, sizeof(indices), GL_STATIC_DRAW);
 	vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
 	vao.unbind();
 
-	// OPTION #2
-	/*vao.load([&]() {
-		vbo.setData(positions, sizeof(positions), GL_STATIC_DRAW);
-		ebo.setData(indices, sizeof(indices), GL_STATIC_DRAW);
-		vao.setPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (GLvoid*)0);
-	});*/
-
 	glEnable(GL_DEPTH_TEST);
 
 	pyramid.updateSize(15);
-
-	//input = getWindow().getInput();
 }
 
 void Game::update(double time) {
-	GLfloat cameraSpeed = 0.25f;
+	using ngengine::input::KeyState;
 
-	if (inputManager.getKeyState(GLFW_KEY_W) == ngengine::input::KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, 0.2f));
+	if (inputManager.getKeyState(GLFW_KEY_W) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, 0.02f));
 	}
-	if (inputManager.getKeyState(GLFW_KEY_S) == ngengine::input::KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, -0.2f));
+	if (inputManager.getKeyState(GLFW_KEY_S) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.0f, -0.02f));
 	}
-	if (inputManager.getKeyState(GLFW_KEY_D) == ngengine::input::KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.2f, 0.0f, 0.0f));
+	if (inputManager.getKeyState(GLFW_KEY_D) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.02f, 0.0f, 0.0f));
 	}
-	if (inputManager.getKeyState(GLFW_KEY_A) == ngengine::input::KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(-0.2f, 0.0f, 0.0f));
+	if (inputManager.getKeyState(GLFW_KEY_A) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(-0.02f, 0.0f, 0.0f));
 	}
-	if (inputManager.getKeyState(GLFW_KEY_SPACE) == ngengine::input::KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.2f, 0.0f));
+	if (inputManager.getKeyState(GLFW_KEY_SPACE) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, 0.02f, 0.0f));
 	}
-	if (inputManager.getKeyState(GLFW_KEY_LEFT_SHIFT) == ngengine::input::KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, -0.2f, 0.0f));
+	if (inputManager.getKeyState(GLFW_KEY_LEFT_SHIFT) == KeyState::Pressed) {
+		camera.addToPositionRelativeToCameraFront(glm::vec3(0.0f, -0.02f, 0.0f));
 	}
 }
 

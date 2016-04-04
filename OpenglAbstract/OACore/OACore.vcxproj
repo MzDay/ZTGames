@@ -74,9 +74,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)src\Dependencies\GLFW\include;$(ProjectDir)src\Dependencies\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)Dependencies\GLFW\lib;$(ProjectDir)Dependencies\GLEW\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)../OACore-bin</OutDir>
-    <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
+    <OutDir>$(SolutionDir)../OACore-bin/</OutDir>
+    <IntDir>$(SolutionDir)bin/$(Configuration)/Intermediates/</IntDir>
     <TargetExt>.lib</TargetExt>
+    <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(IncludePath)</IncludePath>
@@ -101,6 +103,7 @@
       <PrecompiledHeaderFile>ngengine.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -201,7 +204,19 @@
     <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="src\ztengine.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
+    <Import Project="..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets" Condition="Exists('..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CppCoreCheck.14.0.23917.1\build\native\Microsoft.CppCoreCheck.targets'))" />
+  </Target>
 </Project>

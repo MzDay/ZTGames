@@ -27,7 +27,7 @@ namespace ngengine {
 			void setTitle(const std::string&);
 
 		private:
-			static void _onResizeCallback(GLFWwindow*, int, int);
+			static void onResizeCallback(GLFWwindow*, int, int);
 			void attachKeyCallback(std::function<void(GLFWwindow*, int, int, int, int)> callback);
 
 		private:

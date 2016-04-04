@@ -28,11 +28,11 @@ int Pyramid::getSize()
 
 void Pyramid::fillMatrix(int size)
 {
-	for (size_t i = 0; i < pyramidSize; ++i)
+	for (int i = 0; i < pyramidSize; ++i)
 	{
 		Row row(pyramidSize);
 
-		for (size_t j = 0; j < pyramidSize; ++j)
+		for (int j = 0; j < pyramidSize; ++j)
 		{
 			row[j] = getCellValue(i, j);
 		}

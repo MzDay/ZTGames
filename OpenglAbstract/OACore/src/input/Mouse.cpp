@@ -23,9 +23,13 @@ namespace ngengine {
 			Pos2D normalizedPoistion;
 
 			normalizedPoistion.x = -1.0 + 2.0 * mousePoistion.x / windowSize.width;
-			normalizedPoistion.x = -(-1.0 + 2.0 * mousePoistion.y / windowSize.height);
+			normalizedPoistion.y = -(-1.0 + 2.0 * mousePoistion.y / windowSize.height);
 
 			return normalizedPoistion;
+		}
+
+		void Mouse::mouseCallback(double x, double y)
+		{
 		}
 
 		Mouse::~Mouse()

@@ -14,6 +14,7 @@ namespace ngengine {
 			glfwSetWindowUserPointer(window->getHandler(), this);
 
 			glfwSetKeyCallback(window->getHandler(), keyboardCallback);
+			glfwSetCursorPosCallback(window->getHandler(), mouseCallback);
 		}
 
 		Pos2D InputManager::getMousePosition()
@@ -31,17 +32,16 @@ namespace ngengine {
 			return keyboard.getKeyState(keyIdentifier);
 		}
 
-		void InputManager::setKeyState(int keyIdentifier, KeyState keyState)
-		{
-			keyboard.setKeyState(keyIdentifier, keyState);
-		}
-
 		void InputManager::keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 		{
-			KeyState keyState = (action == GLFW_RELEASE) ? KeyState::Released : KeyState::Pressed;
-
 			InputManager* inputManager = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
-			inputManager->setKeyState(key, keyState);
+			inputManager->keyboard.keyboardCallback(key, action);
+		}
+
+		void InputManager::mouseCallback(GLFWwindow * window, double x, double y)
+		{
+			InputManager* inputManager = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
+			inputManager->mouse.mouseCallback(x, y);
 		}
 
 		InputManager::~InputManager()
