@@ -18,6 +18,7 @@ namespace ngengine {
 			inline bool shouldClose() const { return glfwWindowShouldClose(windowHandler) != 0; };
 			void updateWindow();
 			void showWindow();
+
 		public:
 			GLFWwindow* getHandler() const { return windowHandler; }
 
