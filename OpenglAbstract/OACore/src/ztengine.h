@@ -24,3 +24,6 @@
 
 // Input
 #include "input\InputManager.h"
+
+// Entity Properties
+#include "entityProperties\PhysicsProperty.h"

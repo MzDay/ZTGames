@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\Game.h" />
+    <ClInclude Include="app\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\Game.cpp" />
     <ClCompile Include="app\main.cpp" />
+    <ClCompile Include="app\Player.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{60D87948-7066-4AE5-A7CA-67D67BCFDD7C}</ProjectGuid>

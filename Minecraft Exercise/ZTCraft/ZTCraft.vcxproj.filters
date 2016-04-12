@@ -18,12 +18,18 @@
     <ClInclude Include="app\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="app\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="app\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

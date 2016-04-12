@@ -23,6 +23,7 @@ namespace ngengine {
 			void addToPitchInRange(float pitchOffset, float maxPitch, float minPitch);
 			void addToPosition(glm::vec3 positionOffset);
 			void addToPositionRelativeToCameraFront(glm::vec3 positionOffset);
+			void addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3 positionOffset);
 
 			void setPosition(glm::vec3 cameraPosition);
 			void setUp(glm::vec3 cameraUp);

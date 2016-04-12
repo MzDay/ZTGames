@@ -33,11 +33,13 @@ namespace ngengine {
 		void Camera::setYaw(float cameraYaw)
 		{
 			orientation.yaw = cameraYaw;
+			updateFront();
 		}
 
 		void Camera::setPitch(float cameraPitch)
 		{
 			orientation.pitch = cameraPitch;
+			updateFront();
 		}
 
 #pragma endregion
@@ -124,6 +126,11 @@ namespace ngengine {
 			position += positionOffset.z * front;
 			position += positionOffset.y * up;
 			position += positionOffset.x * glm::normalize(glm::cross(front, up));
+		}
+
+		void Camera::addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3 positionOffset)
+		{
+
 		}
 
 #pragma endregion
