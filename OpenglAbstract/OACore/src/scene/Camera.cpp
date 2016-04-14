@@ -130,7 +130,9 @@ namespace ngengine {
 
 		void Camera::addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3 positionOffset)
 		{
-
+			glm::vec3 xCross = glm::cross(front, up);
+			position += positionOffset.x * xCross;
+			position += positionOffset.z * glm::normalize(glm::cross(up, xCross));
 		}
 
 #pragma endregion

@@ -21,7 +21,8 @@ namespace ngengine {
 
 		void PhysicsProperty::update(double deltaTime)
 		{
-			position = physics::Physics::updatePosition(position, velocity, acceleration, deltaTime);
+			velocity = physics::Physics::UpdateVelocity(velocity, acceleration, deltaTime);
+			position = physics::Physics::UpdatePosition(position, velocity, deltaTime);
 		}
 
 		PhysicsProperty::~PhysicsProperty()
