@@ -18,15 +18,14 @@ namespace ngengine {
 		public:
 			void bind();
 			void unbind();
-			void load(std::function<void()> lamb);
 			
 			void setVertexAttrib(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
 
 		public:
-			inline GLuint getHandler() const { return vaoHandler; };
+			inline GLuint getHandle() const { return vaoHandle; };
 
 		private:
-			GLuint vaoHandler;
+			GLuint vaoHandle;
 			bool bindToVAO;
 		};
 	}

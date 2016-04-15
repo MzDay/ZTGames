@@ -21,11 +21,20 @@
   <ItemGroup>
     <ClInclude Include="app\Game.h" />
     <ClInclude Include="app\Player.h" />
+    <ClInclude Include="world\Block.h" />
+    <ClInclude Include="world\SeedBasedRandom.h" />
+    <ClInclude Include="world\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\Game.cpp" />
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\Player.cpp" />
+    <ClCompile Include="world\Block.cpp" />
+    <ClCompile Include="world\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment.glsl" />
+    <None Include="vertex.glsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{60D87948-7066-4AE5-A7CA-67D67BCFDD7C}</ProjectGuid>
@@ -80,6 +89,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CodeAnalysisRuleSet>C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -88,6 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)../OpenglAbstract\OACore\src;$(SolutionDir)../Resources\Libs\glm-master\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>false</EnablePREfast>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)../OACore-bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -108,10 +119,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../OpenglAbstract\OACore\src;$(SolutionDir)../Resources\Libs\glm-master\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)../OACore-bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OACore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

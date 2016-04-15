@@ -19,6 +19,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="app\Player.h">
+    <ClInclude Include="world\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world\SeedBasedRandom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,7 +37,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="app\Player.cpp">
+    <ClCompile Include="world\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="world\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vertex.glsl" />
+    <None Include="fragment.glsl" />
   </ItemGroup>
 </Project>
