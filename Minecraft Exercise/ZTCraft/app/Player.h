@@ -15,9 +15,8 @@ public:
 	~Player();
 
 	void Update(float deltaTime);
-	Camera getCamera() const;
 
-private:
+public:
 	Camera camera;
 	PhysicsProperty physics;
 };

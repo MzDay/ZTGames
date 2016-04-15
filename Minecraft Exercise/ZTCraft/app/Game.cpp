@@ -16,7 +16,7 @@ void Game::startup() {
 	 GLuint projectionLoc = program.getUniformLocation("projection");
 	 glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-	 camera.setPosition(glm::vec3(20.0f, 10.0f, 45.0f));
+	 player.physics.position = glm::vec3(20.0f, 10.0f, 45.0f);
 }
 
 void Game::render(double delta) {	 
@@ -27,13 +27,13 @@ void Game::render(double delta) {
 	 glClear(GL_DEPTH_BUFFER_BIT);
 
 	 world.render(delta);
+	 player.Update(delta);
 }
 
 void Game::update(double delta) {
-	 camera.update();
 	 world.update(delta);
 
-	 lookat = camera.getLookAt();
+	 glm::mat4 lookat = player.camera.getLookAt();
 	 GLuint lookatLoc = program.getUniformLocation("lookat");
 	 glUniformMatrix4fv(lookatLoc, 1, GL_FALSE, glm::value_ptr(lookat));
 }

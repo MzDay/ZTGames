@@ -16,7 +16,7 @@ namespace ngengine {
 
 		void PhysicsProperty::setGravity(float gravity)
 		{
-			acceleration.y = gravity;
+			acceleration.y = -gravity;
 		}
 
 		void PhysicsProperty::update(double deltaTime)

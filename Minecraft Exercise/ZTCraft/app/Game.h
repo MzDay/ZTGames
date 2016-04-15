@@ -3,6 +3,7 @@
 #include <ztengine.h>
 #include "../world/World.h"
 #include "../world/Block.h"
+#include "Player.h"
 #include "glm\gtc\type_ptr.hpp"
 
 using ngengine::graphics::Program;
@@ -22,8 +23,7 @@ public:
 private:
 	 World world;
 	 Program program;
-	 Camera camera;
+	 Player player;
 
-	 glm::mat4 lookat;
 	 glm::mat4 projection;
 };
