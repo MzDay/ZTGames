@@ -21,6 +21,9 @@ public:
 	 void shutdown() override;
 
 private:
+	void windowResizeCallback(int width, int height);
+
+private:
 	 World world;
 	 Program program;
 	 Player player;

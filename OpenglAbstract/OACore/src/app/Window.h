@@ -26,6 +26,7 @@ namespace ngengine {
 
 			inline std::string getTitle() const { return windowTitle; }
 			void setTitle(const std::string&);
+			float getWindowRatio();
 
 		private:
 			static void onResizeCallback(GLFWwindow*, int, int);

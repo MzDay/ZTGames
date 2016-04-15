@@ -5,7 +5,7 @@ namespace ngengine {
 	namespace app {
 
 		Window::Window(const std::string& title, utils::Size2D size) :
-			windowTitle(title), windowSize(size), windowHandle(nullptr){
+			windowTitle(title), windowSize(size), windowHandle(nullptr) {
 		}
 
 		Window::~Window() {
@@ -37,6 +37,11 @@ namespace ngengine {
 			glfwSetWindowTitle(windowHandle, title.c_str());
 		}
 
+		float Window::getWindowRatio()
+		{
+			return windowSize.width / windowSize.height;
+		}
+
 		void Window::updateWindow() {
 			// TODO: Check if we can avoid using glClear here and let the user decide
 			glClear(GL_DEPTH);
@@ -59,8 +64,9 @@ namespace ngengine {
 		}
 
 		void Window::onResizeCallback(GLFWwindow* window, int width, int height) {
-			// TODO: Maybe give the user access to know when the window has changed by using glfwGetWindowUserPointer to (this)
 			glViewport(0, 0, width, height);
+
+			// TODO: Maybe give the user access to know when the window has changed by using glfwGetWindowUserPointer to (this)
 		}
 	}
 }

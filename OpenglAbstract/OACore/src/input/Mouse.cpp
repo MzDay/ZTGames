@@ -28,10 +28,6 @@ namespace ngengine {
 			return normalizedPoistion;
 		}
 
-		void Mouse::mouseCallback(double x, double y)
-		{
-		}
-
 		Mouse::~Mouse()
 		{
 		}

@@ -32,6 +32,12 @@ namespace ngengine {
 			return keyboard.getKeyState(keyIdentifier);
 		}
 
+		void InputManager::setUserMouseCallback(std::function<void(double x, double y)> callback)
+		{
+			userMouseCallback = callback;
+			//glfwSetInputMode(window->getHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+
 		void InputManager::keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 		{
 			InputManager* inputManager = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
@@ -41,7 +47,11 @@ namespace ngengine {
 		void InputManager::mouseCallback(GLFWwindow * window, double x, double y)
 		{
 			InputManager* inputManager = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
-			inputManager->mouse.mouseCallback(x, y);
+
+			if (inputManager->userMouseCallback != nullptr)
+			{
+				inputManager->userMouseCallback(x, y);
+			}
 		}
 
 		InputManager::~InputManager()

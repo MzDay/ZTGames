@@ -25,6 +25,8 @@ namespace ngengine {
 			Pos2D getNormalizedMousePosition();
 			KeyState getKeyState(int keyIdentifier);
 
+			void setUserMouseCallback(std::function<void(double x, double y)> callback);
+
 		private:
 			static void keyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
 			static void mouseCallback(GLFWwindow* window, double x, double y);
@@ -33,6 +35,7 @@ namespace ngengine {
 			Window* window;
 			Keyboard keyboard;
 			Mouse mouse;
+			std::function<void(double x, double y)>  userMouseCallback;
 		};
 	}
 }
