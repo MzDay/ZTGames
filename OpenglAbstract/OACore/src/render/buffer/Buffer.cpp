@@ -5,12 +5,12 @@ namespace ngengine {
 	namespace render {
 		Buffer::~Buffer()
 		{
-			glDeleteBuffers(1, &bufferHandler);
+			glDeleteBuffers(1, &bufferHandle);
 		}
 
-		GLuint ngengine::render::Buffer::getHandler() const
+		GLuint ngengine::render::Buffer::getHandle() const
 		{
-			return bufferHandler;
+			return bufferHandle;
 		}
 
 		GLenum Buffer::getTarget() const
@@ -35,8 +35,20 @@ namespace ngengine {
 				// TODO: Throw error because the user didn't declare any target
 				throw std::exception("Didn't declare target");
 			}
-			glBindBuffer(bufferTarget, bufferHandler);
+
+			bufferUsage = usage;
+
 			glBufferData(bufferTarget, sizeInBytes, data, usage);
+		}
+
+		void Buffer::bind()
+		{
+			 glBindBuffer(bufferTarget, bufferHandle);
+		}
+
+		void Buffer::unbind()
+		{
+			 glBindBuffer(bufferTarget, 0);
 		}
 	}
 }

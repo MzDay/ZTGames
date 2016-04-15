@@ -11,20 +11,20 @@ namespace ngengine {
 		void InputManager::setWindow(Window&& parentWindow) {
 			window = &parentWindow;
 
-			glfwSetWindowUserPointer(window->getHandler(), this);
+			glfwSetWindowUserPointer(window->getHandle(), this);
 
-			glfwSetKeyCallback(window->getHandler(), keyboardCallback);
-			glfwSetCursorPosCallback(window->getHandler(), mouseCallback);
+			glfwSetKeyCallback(window->getHandle(), keyboardCallback);
+			glfwSetCursorPosCallback(window->getHandle(), mouseCallback);
 		}
 
 		Pos2D InputManager::getMousePosition()
 		{
-			return mouse.getMousePosition(window->getHandler());
+			return mouse.getMousePosition(window->getHandle());
 		}
 
 		Pos2D InputManager::getNormalizedMousePosition()
 		{
-			return mouse.getNormalizedMousePosition(window->getHandler(), window->getSize());
+			return mouse.getNormalizedMousePosition(window->getHandle(), window->getSize());
 		}
 
 		KeyState InputManager::getKeyState(int keyIdentifier)

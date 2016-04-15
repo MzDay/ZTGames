@@ -15,12 +15,12 @@ namespace ngengine {
 		public:
 			void createWindow();
 			void makeContext();
-			inline bool shouldClose() const { return glfwWindowShouldClose(windowHandler) != 0; };
+			inline bool shouldClose() const { return glfwWindowShouldClose(windowHandle) != 0; };
 			void updateWindow();
 			void showWindow();
 
 		public:
-			GLFWwindow* getHandler() const { return windowHandler; }
+			GLFWwindow* getHandle() const { return windowHandle; }
 
 			utils::Size2D getSize();
 
@@ -34,7 +34,7 @@ namespace ngengine {
 		private:
 			std::string windowTitle;
 			utils::Size2D windowSize;
-			GLFWwindow* windowHandler;
+			GLFWwindow* windowHandle;
 		};
 	}
 }

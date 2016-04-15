@@ -5,48 +5,48 @@ namespace ngengine {
 	namespace app {
 
 		Window::Window(const std::string& title, utils::Size2D size) :
-			windowTitle(title), windowSize(size), windowHandler(nullptr){
+			windowTitle(title), windowSize(size), windowHandle(nullptr){
 		}
 
 		Window::~Window() {
-			glfwDestroyWindow(windowHandler);
+			glfwDestroyWindow(windowHandle);
 		}
 
 		void Window::createWindow() {
-			windowHandler = glfwCreateWindow(windowSize.width, windowSize.height, windowTitle.c_str(), nullptr, nullptr);
+			windowHandle = glfwCreateWindow(windowSize.width, windowSize.height, windowTitle.c_str(), nullptr, nullptr);
 
 			// First hide the window
-			glfwHideWindow(windowHandler);
+			glfwHideWindow(windowHandle);
 
-			glfwSetWindowSizeCallback(windowHandler, onResizeCallback);
+			glfwSetWindowSizeCallback(windowHandle, onResizeCallback);
 		}
 
 		void Window::showWindow() {
-			glfwShowWindow(windowHandler);
+			glfwShowWindow(windowHandle);
 		}
 
 		void Window::makeContext() {
-			if (windowHandler != nullptr) {
-				glfwMakeContextCurrent(windowHandler);
+			if (windowHandle != nullptr) {
+				glfwMakeContextCurrent(windowHandle);
 			}
 			// TODO: Maybe throw exception
 		}
 
 		void Window::setTitle(const std::string& title) {
 			windowTitle = title;
-			glfwSetWindowTitle(windowHandler, title.c_str());
+			glfwSetWindowTitle(windowHandle, title.c_str());
 		}
 
 		void Window::updateWindow() {
 			// TODO: Check if we can avoid using glClear here and let the user decide
 			glClear(GL_DEPTH);
 			glfwPollEvents();
-			glfwSwapBuffers(windowHandler);
+			glfwSwapBuffers(windowHandle);
 		}
 
 		utils::Size2D Window::getSize()
 		{
-			glfwGetWindowSize(windowHandler, &(windowSize.width), &windowSize.height);
+			glfwGetWindowSize(windowHandle, &(windowSize.width), &windowSize.height);
 
 			return windowSize;
 		}
@@ -55,7 +55,7 @@ namespace ngengine {
 		{
 			GLFWkeyfun* ptr = callback.target<GLFWkeyfun>();
 
-			glfwSetKeyCallback(windowHandler, *ptr);
+			glfwSetKeyCallback(windowHandle, *ptr);
 		}
 
 		void Window::onResizeCallback(GLFWwindow* window, int width, int height) {

@@ -18,6 +18,7 @@
     <ClInclude Include="app\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="app\Player.h">
     <ClInclude Include="world\World.h">
       <Filter>Header Files</Filter>
@@ -26,6 +27,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="world\SeedBasedRandom.h">
+=======
+    <ClInclude Include="world\SeedBasedRandom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world\Block.h">
+>>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -36,7 +46,10 @@
     <ClCompile Include="app\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="app\Player.cpp">
+=======
+>>>>>>> Stashed changes
     <ClCompile Include="world\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

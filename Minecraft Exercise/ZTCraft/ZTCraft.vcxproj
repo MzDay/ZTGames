@@ -20,7 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\Game.h" />
+<<<<<<< Updated upstream
     <ClInclude Include="app\Player.h" />
+=======
+>>>>>>> Stashed changes
     <ClInclude Include="world\Block.h" />
     <ClInclude Include="world\SeedBasedRandom.h" />
     <ClInclude Include="world\World.h" />
@@ -28,7 +31,10 @@
   <ItemGroup>
     <ClCompile Include="app\Game.cpp" />
     <ClCompile Include="app\main.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="app\Player.cpp" />
+=======
+>>>>>>> Stashed changes
     <ClCompile Include="world\Block.cpp" />
     <ClCompile Include="world\World.cpp" />
   </ItemGroup>
@@ -115,7 +121,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -124,6 +130,10 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+<<<<<<< Updated upstream
+=======
+      <SubSystem>NotSet</SubSystem>
+>>>>>>> Stashed changes
       <AdditionalLibraryDirectories>$(SolutionDir)../OACore-bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OACore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
