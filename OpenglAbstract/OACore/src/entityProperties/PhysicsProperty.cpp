@@ -8,7 +8,6 @@ namespace ngengine {
 	namespace entityProperties {
 
 		PhysicsProperty::PhysicsProperty() :
-			position(0.0f, 0.0f, 0.0f),
 			velocity(0.0f, 0.0f, 0.0f),
 			acceleration(0.0f, 0.0f, 0.0f)
 		{
@@ -22,7 +21,7 @@ namespace ngengine {
 		void PhysicsProperty::update(double deltaTime)
 		{
 			velocity = physics::Physics::UpdateVelocity(velocity, acceleration, deltaTime);
-			position = physics::Physics::UpdatePosition(position, velocity, deltaTime);
+			node->position = physics::Physics::UpdatePosition(node->position, velocity, deltaTime);
 		}
 
 		PhysicsProperty::~PhysicsProperty()

@@ -1,12 +1,13 @@
 #pragma once
 
 #include "IEntityProperty.h"
+#include "physics\PhysicalEntity.h"
 #include "glm\glm.hpp"
 
 namespace ngengine {
 	namespace entityProperties {
 
-		class PhysicsProperty : public IEntityProperty {
+		class PhysicsProperty : public IEntityProperty, public physics::PhysicalEntity  {
 
 		public:
 			PhysicsProperty();
@@ -16,7 +17,6 @@ namespace ngengine {
 			void update(double deltaTime);
 
 		public:
-			glm::vec3 position;
 			glm::vec3 velocity;
 			glm::vec3 acceleration;
 		};

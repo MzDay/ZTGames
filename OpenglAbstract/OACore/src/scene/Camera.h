@@ -5,11 +5,12 @@
 #include "glm\glm.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 #include "utils\Orientation.h"
+#include "physics\PhysicalEntity.h"
 
 namespace ngengine {
 	namespace scene {
 
-		class Camera
+		class Camera : public physics::PhysicalEntity
 		{
 		public:
 			Camera();
@@ -30,8 +31,12 @@ namespace ngengine {
 			void setSensetivity(float cameraSensetivity);
 			void setYaw(float cameraYaw);
 			void setPitch(float cameraPitch);
+			void setFOV(float fieldOfView);
+			void setRatio(float viewRatio);
+			void setNearClipSpace(float nearClipSapce);
+			void setFarClipSpace(float farClipSpace);
 
-			glm::mat4 getLookAt() const;
+			glm::mat4 getCameraMatrix() const;
 			glm::vec3 getPosition() const;
 			glm::vec3 getUp() const;
 			float getSensetivity() const;
@@ -39,14 +44,19 @@ namespace ngengine {
 
 		private:
 			void updateFront();
+			void updateProjection();
 
 		private:
 			glm::mat4 lookAt;
-			glm::vec3 position;
 			glm::vec3 up;
 			glm::vec3 front;
 			float sensetivity;
-			utils::Orientation orientation;
+
+			glm::mat4 projection;
+			float fov;
+			float ratio;
+			float near;
+			float far;
 		};
 	}
 }

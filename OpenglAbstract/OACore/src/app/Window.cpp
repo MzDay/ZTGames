@@ -13,6 +13,7 @@ namespace ngengine {
 		}
 
 		void Window::createWindow() {
+			glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 			windowHandle = glfwCreateWindow(windowSize.width, windowSize.height, windowTitle.c_str(), nullptr, nullptr);
 
 			// First hide the window

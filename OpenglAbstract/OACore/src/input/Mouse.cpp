@@ -6,6 +6,7 @@ namespace ngengine {
 
 		Mouse::Mouse()
 		{
+			isFirstMouse = true;
 		}
 
 		Pos2D Mouse::getMousePosition(GLFWwindow* window)
@@ -28,8 +29,32 @@ namespace ngengine {
 			return normalizedPoistion;
 		}
 
+		void Mouse::setUserMouseCallback(std::function<void(double oldX, double oldY, double newX, double newY)> callback)
+		{
+			userMouseCallback = callback;
+		}
+
+		void Mouse::mouseCallback(double x, double y)
+		{
+			if (isFirstMouse)
+			{
+				lastMousePos.x = x;
+				lastMousePos.y = y;
+				isFirstMouse = false;
+			}
+
+			if (userMouseCallback != nullptr)
+			{
+				userMouseCallback(lastMousePos.x, lastMousePos.y, x, y);
+			}
+
+			lastMousePos.x = x;
+			lastMousePos.y = y;
+		}
+
 		Mouse::~Mouse()
 		{
 		}
+
 	}
 }

@@ -3,12 +3,16 @@
 
 namespace ngengine {
 	namespace scene {
+
 		Camera::Camera() :
-			position(0.0f, 0.0f, 0.0f),
 			up(0.0f, 1.0f, 0.0f),
-			orientation(-90.0f, 0.0f, 0.0f),
-			sensetivity(0.25f)
+			sensetivity(0.25f),
+			fov(45.0f),
+			ratio(1.0f),
+			near(0.1f),
+			far(100.0f)
 		{
+			updateProjection();
 			updateFront();
 			update();
 		}
@@ -17,7 +21,7 @@ namespace ngengine {
 
 		void Camera::setPosition(glm::vec3 cameraPosition)
 		{
-			position = cameraPosition;
+			node->position = cameraPosition;
 		}
 
 		void Camera::setUp(glm::vec3 cameraUp)
@@ -32,28 +36,52 @@ namespace ngengine {
 
 		void Camera::setYaw(float cameraYaw)
 		{
-			orientation.yaw = cameraYaw;
+			node->orientation.yaw = cameraYaw;
 			updateFront();
 		}
 
 		void Camera::setPitch(float cameraPitch)
 		{
-			orientation.pitch = cameraPitch;
+			node->orientation.pitch = cameraPitch;
 			updateFront();
+		}
+
+		void scene::Camera::setFOV(float fieldOfView)
+		{
+			fov = fieldOfView;
+			updateProjection();
+		}
+
+		void scene::Camera::setRatio(float viewRatio)
+		{
+			ratio = viewRatio;
+			updateProjection();
+		}
+
+		void scene::Camera::setNearClipSpace(float nearClipSapce)
+		{
+			near = nearClipSapce;
+			updateProjection();
+		}
+
+		void scene::Camera::setFarClipSpace(float farClipSpace)
+		{
+			far = farClipSpace;
+			updateProjection();
 		}
 
 #pragma endregion
 
 #pragma region Getters
 
-		glm::mat4 Camera::getLookAt() const
+		glm::mat4 Camera::getCameraMatrix() const
 		{
-			return lookAt;
+			return projection * lookAt ;
 		}
 
 		glm::vec3 Camera::getPosition() const
 		{
-			return position;
+			return node->position;
 		}
 
 		glm::vec3 Camera::getUp() const
@@ -68,7 +96,7 @@ namespace ngengine {
 
 		utils::Orientation Camera::getOrientation() const
 		{
-			return orientation;
+			return node->orientation;
 		}
 
 #pragma endregion
@@ -77,62 +105,62 @@ namespace ngengine {
 
 		void Camera::update()
 		{
-			lookAt = glm::lookAt(position, position + front, up);
+			lookAt = glm::lookAt(node->position, node->position + front, up);
 		}
 
 		void Camera::addToYaw(float yawOffset)
 		{
-			orientation.yaw += yawOffset;
+			node->orientation.yaw += yawOffset;
 			updateFront();
 		}
 
 		void Camera::addToYawInRange(float yawOffset, float maxYaw, float minYaw)
 		{
-			orientation.yaw += yawOffset;
+			node->orientation.yaw += yawOffset;
 
-			if (orientation.pitch > maxYaw)
-				orientation.pitch = maxYaw;
-			if (orientation.pitch < minYaw)
-				orientation.pitch = minYaw;
+			if (node->orientation.pitch > maxYaw)
+				node->orientation.pitch = maxYaw;
+			if (node->orientation.pitch < minYaw)
+				node->orientation.pitch = minYaw;
 
 			updateFront();
 		}
 
 		void Camera::addToPitch(float pitchOffset)
 		{
-			orientation.pitch += pitchOffset;
+			node->orientation.pitch += pitchOffset;
 			updateFront();
 		}
 
 		void Camera::addToPitchInRange(float pitchOffset, float maxPitch, float minPitch)
 		{
-			orientation.pitch += pitchOffset;
+			node->orientation.pitch += pitchOffset;
 
-			if (orientation.pitch > maxPitch)
-				orientation.pitch = maxPitch;
-			if (orientation.pitch < minPitch)
-				orientation.pitch = minPitch;
+			if (node->orientation.pitch > maxPitch)
+				node->orientation.pitch = maxPitch;
+			if (node->orientation.pitch < minPitch)
+				node->orientation.pitch = minPitch;
 
 			updateFront();
 		}
 
 		void Camera::addToPosition(glm::vec3 positionOffset)
 		{
-			position += positionOffset;
+			node->position += positionOffset;
 		}
 
 		void Camera::addToPositionRelativeToCameraFront(glm::vec3 positionOffset)
 		{
-			position += positionOffset.z * front;
-			position += positionOffset.y * up;
-			position += positionOffset.x * glm::normalize(glm::cross(front, up));
+			node->position += positionOffset.z * front;
+			node->position += positionOffset.y * up;
+			node->position += positionOffset.x * glm::normalize(glm::cross(front, up));
 		}
 
 		void Camera::addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3 positionOffset)
 		{
 			glm::vec3 xCross = glm::cross(front, up);
-			position += positionOffset.x * xCross;
-			position += positionOffset.z * glm::normalize(glm::cross(up, xCross));
+			node->position += positionOffset.x * xCross;
+			node->position += positionOffset.z * glm::normalize(glm::cross(up, xCross));
 		}
 
 #pragma endregion
@@ -142,10 +170,15 @@ namespace ngengine {
 		void Camera::updateFront()
 		{
 			glm::vec3 cameraFront;
-			cameraFront.x = cos(glm::radians(orientation.yaw)) * cos(glm::radians(orientation.pitch));
-			cameraFront.y = sin(glm::radians(orientation.pitch));
-			cameraFront.z = sin(glm::radians(orientation.yaw)) * cos(glm::radians(orientation.pitch));
+			cameraFront.x = cos(glm::radians(node->orientation.yaw)) * cos(glm::radians(node->orientation.pitch));
+			cameraFront.y = sin(glm::radians(node->orientation.pitch));
+			cameraFront.z = sin(glm::radians(node->orientation.yaw)) * cos(glm::radians(node->orientation.pitch));
 			front = glm::normalize(cameraFront);
+		}
+
+		void scene::Camera::updateProjection()
+		{
+			projection = glm::perspective(glm::radians(fov), ratio, near, far);
 		}
 
 #pragma endregion

@@ -25,15 +25,11 @@ public:
 
 private:
 	void updateInput(float deltaTime);
-	void handleMouseInput(double x, double y);
+	void handleMouseInput(double oldX, double oldY, double newX, double newY);
 
 public:
 	Camera camera;
 	PhysicsProperty physics;
 	InputManager* input;
-
-private:
-	Pos2D lastMousePos;
-	bool isFirstMouse;
 };
 

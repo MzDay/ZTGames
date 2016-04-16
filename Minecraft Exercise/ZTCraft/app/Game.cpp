@@ -12,12 +12,9 @@ void Game::startup() {
 	// Bind the program with the blocks
 	Block::setProgramId(program.getProgram());
 
-	projection = glm::perspective(glm::radians(45.0f), window.getWindowRatio(), 0.1f, 100.0f);
-	GLuint projectionLoc = program.getUniformLocation("projection");
-	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
-	player.physics.position = glm::vec3(20.0f, 10.0f, 45.0f);
+	(player.physics.node)->position = glm::vec3(20.0f, 10.0f, 45.0f);
 	player.SetInputManager(inputManager);
+	player.camera.setRatio(window.getWindowRatio());
 }
 
 void Game::render(double delta) {
@@ -34,9 +31,9 @@ void Game::render(double delta) {
 void Game::update(double delta) {
 	world.update(delta);
 
-	glm::mat4 lookat = player.camera.getLookAt();
-	GLuint lookatLoc = program.getUniformLocation("lookat");
-	glUniformMatrix4fv(lookatLoc, 1, GL_FALSE, glm::value_ptr(lookat));
+	glm::mat4 cameraMatrix = player.camera.getCameraMatrix();
+	GLuint cameraMatrixLoc = program.getUniformLocation("cameraMatrix");
+	glUniformMatrix4fv(cameraMatrixLoc, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
 }
 
 void Game::shutdown() {

@@ -176,6 +176,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ngengine.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\physics\PhysicalEntity.cpp" />
+    <ClCompile Include="src\physics\PhysicalNode.cpp" />
     <ClCompile Include="src\physics\Physics.cpp" />
     <ClCompile Include="src\render\buffer\Buffer.cpp" />
     <ClCompile Include="src\render\buffer\VertexArray.cpp" />
@@ -198,6 +200,8 @@
     <ClInclude Include="src\input\Keyboard.h" />
     <ClInclude Include="src\input\Mouse.h" />
     <ClInclude Include="src\ngengine.h" />
+    <ClInclude Include="src\physics\PhysicalEntity.h" />
+    <ClInclude Include="src\physics\PhysicalNode.h" />
     <ClInclude Include="src\physics\Physics.h" />
     <ClInclude Include="src\scene\Camera.h" />
     <ClInclude Include="src\utils\Direction.h" />
