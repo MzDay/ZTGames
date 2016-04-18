@@ -17,7 +17,7 @@ void Game::startup() {
 	player.camera.setRatio(window.getWindowRatio());
 }
 
-void Game::render(double delta) {
+void Game::render(float delta) {
 	// We only have one program so this is fine for now
 
 	static const GLfloat color[] = { 0.6f, 0.7f, 0.5f, 1.0f };
@@ -28,7 +28,7 @@ void Game::render(double delta) {
 	player.Update(delta);
 }
 
-void Game::update(double delta) {
+void Game::update(float delta) {
 	world.update(delta);
 
 	glm::mat4 cameraMatrix = player.camera.getCameraMatrix();

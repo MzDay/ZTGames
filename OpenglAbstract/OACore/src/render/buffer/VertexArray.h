@@ -26,7 +26,7 @@ namespace ngengine {
 
 		private:
 			GLuint vaoHandle;
-			bool bindToVAO;
+			bool boundToVAO;
 		};
 	}
 }

@@ -6,15 +6,17 @@
 class World {
 public:
 	 World() : seed(123){
-		  float start = 1.0f;
-		  for (int i = 0; i < 100; ++i) {
-			   blocks.push_back(new Block(start++, 4.0f, 1.0f));
+		  for (float x = 0.0f; x < 100.0f; ++x) {
+			   for (float y = 0.0f; y < 10.0f; ++y) {
+					for (float z = 0.0f; z < 10.0f; ++z)
+					blocks.push_back(new Block(x, y, z));
+			   }
 		  }
 	 }
 
 public:
-	 void render(double delta);
-	 void update(double delta);
+	 void render(float delta);
+	 void update(float delta);
 
 private:
 	 std::deque<Block*> blocks;

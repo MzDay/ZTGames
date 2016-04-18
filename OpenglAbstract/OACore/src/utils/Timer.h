@@ -7,6 +7,9 @@ namespace ngengine {
 		using std::chrono::high_resolution_clock;
 		using std::chrono::duration;
 		using std::chrono::time_point;
+		using std::chrono::duration_cast;
+
+		typedef std::chrono::duration<float> fsec;
 
 		class Timer
 		{
@@ -17,21 +20,26 @@ namespace ngengine {
 			{
 			}
 
-			double getDelta()
+			float getDelta()
 			{
+				 // TODO: Fix delta time because either it doesn't return the right value
+				 //		  or we use it wrong!
 				auto timeCurrent = high_resolution_clock::now();
 
-				duration<float, std::milli> delta(timeCurrent - timePrev);
+				fsec d = timeCurrent - timePrev;
 
-				timePrev = high_resolution_clock::now();
+				//duration<float, std::milli> delta(timeCurrent - timePrev);
+				float delta = duration_cast<std::chrono::milliseconds>(d).count();
 
-				return delta.count();
+				timePrev = timeCurrent;
+
+				return delta;
 			}
 
-			double getPassedTime() {
+			float getPassedTime() {
 				auto timeCurrent = high_resolution_clock::now();
 
-				duration< double > delta(timeCurrent - firstStart);
+				duration< float > delta(timeCurrent - firstStart);
 
 				return delta.count();
 			}

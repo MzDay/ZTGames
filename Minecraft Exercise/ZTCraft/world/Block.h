@@ -33,8 +33,8 @@ public:
 	 }
 
 public:
-	 void render(double delta);
-	 void update(double delta);
+	 void render(float delta);
+	 void update(float delta);
 
 public:
 	 // We do this so we wont have to get the program everytime

@@ -4,7 +4,7 @@
 namespace ngengine {
 	namespace render {
 
-		VertexArray::VertexArray() : bindToVAO(false)
+		VertexArray::VertexArray() : boundToVAO(false)
 		{
 			glGenVertexArrays(1, &vaoHandle);
 		}
@@ -15,23 +15,23 @@ namespace ngengine {
 		}
 
 		void VertexArray::bind(){
-			if(!bindToVAO)
+			if(!boundToVAO)
 			{
-				bindToVAO = true;
+				boundToVAO = true;
 				glBindVertexArray(vaoHandle);
 			}
 		}
 
 		void VertexArray::unbind(){
-			if(bindToVAO)
+			if(boundToVAO)
 			{
-				bindToVAO = false;
+				boundToVAO = false;
 				glBindVertexArray(0);
 			}
 		}
 
 		void VertexArray::setVertexAttrib(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer){
-			if(!bindToVAO)
+			if(!boundToVAO)
 				 throw std::exception("You didn't bind the vao!");
 
 			glVertexAttribPointer(index, size, type, normalized, stride, pointer);

@@ -18,7 +18,7 @@ namespace ngengine {
 			acceleration.y = -gravity;
 		}
 
-		void PhysicsProperty::update(double deltaTime)
+		void PhysicsProperty::update(float deltaTime)
 		{
 			velocity = physics::Physics::UpdateVelocity(velocity, acceleration, deltaTime);
 			node->position = physics::Physics::UpdatePosition(node->position, velocity, deltaTime);

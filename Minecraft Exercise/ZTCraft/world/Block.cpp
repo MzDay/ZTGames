@@ -2,14 +2,14 @@
 
 GLuint Block::modelLocation;
 
-void Block::render(double delta)
+void Block::render(float delta)
 {
 	 vao.bind();	
 		  glDrawElements(GL_TRIANGLE_STRIP, 36, GL_UNSIGNED_INT, 0);
 	 vao.unbind();
 }
 
-void Block::update(double delta) {
+void Block::update(float delta) {
 	 model = glm::mat4();
 	 model = glm::translate(model, glm::vec3(xPos, yPos, zPos));
 	 glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));

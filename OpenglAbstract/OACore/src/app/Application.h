@@ -37,8 +37,8 @@ namespace ngengine {
 			virtual void run() final;
 
 		protected:
-			virtual void render(double) {};
-			virtual void update(double) {};
+			virtual void render(float) {};
+			virtual void update(float) {};
 			virtual void startup() {};
 			virtual void shutdown() {};
 

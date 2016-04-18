@@ -15,8 +15,8 @@ public:
 	 using Application::Application;
 
 public:
-	 void render(double delta) override;
-	 void update(double delta) override;
+	 void render(float delta) override;
+	 void update(float delta) override;
 	 void startup() override;
 	 void shutdown() override;
 

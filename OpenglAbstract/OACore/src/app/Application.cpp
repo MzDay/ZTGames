@@ -15,9 +15,13 @@ namespace ngengine {
 			window.makeContext();
 
 			// We initialize the GLEW to make opengl function work
+			// TODO: WE HAVE TO MOVE THIS TO SOME STATIC LOADING CLASS (See page.235) BECAUSE WE CANT
+			//		 CREATE STATIC MEMBERS WITHOUT GLEW INIT FIRST! (OpenGL commands)
 			if (glewInit() != GLEW_OK) {
 				std::cerr << "GLEW failed to init" << std::endl;
+				exit(0);
 			}
+			std::cout << "GLEW Initialized!" << std::endl;
 
 			inputManager.setWindow(std::move(window));
 		}
@@ -28,9 +32,11 @@ namespace ngengine {
 			// Use the startup function that the user defined (if he had)
 			startup();
 
+			float delta;
 			while (!window.shouldClose()) {
-				update(timer.getDelta());
-				render(timer.getDelta());
+				delta = timer.getDelta();
+				update(delta);
+				render(delta);
 
 				window.updateWindow();
 			}

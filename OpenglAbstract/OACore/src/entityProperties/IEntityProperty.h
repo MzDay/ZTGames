@@ -6,7 +6,7 @@ namespace ngengine {
 		class IEntityProperty {
 
 		public:
-			virtual void update(double deltaTime) = 0;
+			virtual void update(float deltaTime) = 0;
 		};
 	}
 }

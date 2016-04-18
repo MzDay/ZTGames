@@ -14,7 +14,7 @@ namespace ngengine {
 			~PhysicsProperty();
 
 			void setGravity(float gravity);
-			void update(double deltaTime);
+			virtual void update(float deltaTime) override;
 
 		public:
 			glm::vec3 velocity;
