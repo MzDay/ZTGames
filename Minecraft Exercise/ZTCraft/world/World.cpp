@@ -2,8 +2,8 @@
 
 void World::render(float delta) {
 	 for (unsigned int i = 0; i < blocks.size(); ++i) {
-		  blocks[i]->update(delta);
-		  blocks[i]->render(delta);
+		 blockRenderer.update(delta, blocks[i]);
+		 blockRenderer.render(delta, blocks[i]);
 	 }
 }
 

@@ -2,7 +2,7 @@
 
 #include <ztengine.h>
 #include "../world/World.h"
-#include "../world/Block.h"
+#include "../world/BlockRenderer.h"
 #include "Player.h"
 #include "glm\gtc\type_ptr.hpp"
 

@@ -10,7 +10,7 @@ void Game::startup() {
 	program.useProgram();
 
 	// Bind the program with the blocks
-	Block::setProgramId(program.getProgram());
+	BlockRenderer::setProgramId(program.getProgram());
 
 	(player.physics.node)->position = glm::vec3(20.0f, 10.0f, 45.0f);
 	player.SetInputManager(inputManager);
@@ -25,11 +25,11 @@ void Game::render(float delta) {
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	world.render(delta);
-	player.Update(delta);
 }
 
 void Game::update(float delta) {
 	world.update(delta);
+	player.Update(delta);
 
 	glm::mat4 cameraMatrix = player.camera.getCameraMatrix();
 	GLuint cameraMatrixLoc = program.getUniformLocation("cameraMatrix");
