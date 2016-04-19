@@ -15,6 +15,7 @@ void Game::startup() {
 	(player.physics.node)->position = glm::vec3(20.0f, 10.0f, 45.0f);
 	player.SetInputManager(inputManager);
 	player.camera.setRatio(window.getWindowRatio());
+	player.camera.setFarClipSpace(1000.0f);
 }
 
 void Game::render(float delta) {
