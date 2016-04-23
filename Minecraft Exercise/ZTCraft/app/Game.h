@@ -3,6 +3,7 @@
 #include <ztengine.h>
 #include "../world/World.h"
 #include "../world/BlockRenderer.h"
+#include "../world/Chunk.h"
 #include "Player.h"
 #include "glm\gtc\type_ptr.hpp"
 
@@ -24,6 +25,7 @@ private:
 	 World world;
 	 Program program;
 	 Player player;
+	 Chunk chunk;
 
 	 glm::mat4 projection;
 };

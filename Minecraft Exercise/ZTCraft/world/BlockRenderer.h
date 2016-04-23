@@ -61,5 +61,5 @@ private:
 
 private:
 	static const GLfloat  cube_vertices[24];
-	static const GLuint cube_indices[14];
+	static const GLuint cube_indices[36];
 };

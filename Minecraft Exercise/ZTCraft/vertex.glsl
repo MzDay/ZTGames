@@ -1,13 +1,11 @@
 #version 440 core
 
-layout(location = 0) in vec3 position;
-
+attribute vec4 coord;
 uniform mat4 cameraMatrix;
-uniform mat4 model;
 
 out vec4 colorfs;
 
 void main(){
-	 gl_Position = cameraMatrix * model * vec4(position, 1.0f);
-	 colorfs = vec4(position, 1.0f);
+	 gl_Position = cameraMatrix * vec4(coord.xyz, 1.0f);
+	 colorfs = vec4(coord.xyz, 1.0f);
 }

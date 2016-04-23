@@ -22,6 +22,7 @@
     <ClInclude Include="app\Game.h" />
     <ClInclude Include="app\Player.h" />
     <ClInclude Include="world\BlockRenderer.h" />
+    <ClInclude Include="world\Chunk.h" />
     <ClInclude Include="world\SeedBasedRandom.h" />
     <ClInclude Include="world\World.h" />
   </ItemGroup>
