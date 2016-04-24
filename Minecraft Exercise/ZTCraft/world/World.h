@@ -7,13 +7,12 @@ class World {
 public:
 	World() : seed(123) {
 		for (float x = 0.0f; x < 1000.0f; ++x) {
-			for (float z = 0.0f; z < 100.0f; ++z) {
+			for (float z = 0.0f; z < 500.0f; ++z) {
 				Pos3D pos;
 				pos.x = x;
-				pos.y = sin(x) * cos(z);
+				pos.y = cos(x) * sin(z);
 				pos.z = z;
 				blocks.push_back(Block(pos));
-
 			}
 		}
 	}

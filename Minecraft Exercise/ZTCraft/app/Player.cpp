@@ -21,7 +21,7 @@ void Player::SetInputManager(InputManager& inputManager)
 
 void Player::updateInput(float deltaTime)
 {
-	 static const float cSpeed = 0.02f;
+	 static const float cSpeed = 0.08f;
 
 	if (input == nullptr) { 
 		return;

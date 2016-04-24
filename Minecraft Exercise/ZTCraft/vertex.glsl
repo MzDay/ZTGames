@@ -1,11 +1,11 @@
 #version 440 core
 
-attribute vec4 coord;
+attribute vec3 coord;
 uniform mat4 cameraMatrix;
 
 out vec4 colorfs;
 
 void main(){
-	 gl_Position = cameraMatrix * vec4(coord.xyz, 1.0f);
-	 colorfs = vec4(coord.xyz, 1.0f);
+	 gl_Position = cameraMatrix * vec4(coord, 1.0f);
+	 colorfs = vec4(coord, 1.0f);
 }

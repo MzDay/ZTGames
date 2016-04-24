@@ -45,9 +45,7 @@ namespace ngengine {
 		public:
 			Window window;
 			InputManager inputManager;
-
-		private:
-			 Timer timer;
+			Timer timer;
 		};
 	}
 }

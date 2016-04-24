@@ -12,12 +12,17 @@ void Game::startup() {
 	// Bind the program with the blocks
 	//BlockRenderer::setProgramId(program.getProgram())
 	chunk.setProgramId(program.getProgram());
+	auto start = timer.getPassedTime();
 	chunk.update();
+	auto end = timer.getPassedTime();
+
+	std::cout << "Time took " << end - start << "s\n";
 
 	(player.physics.node)->position = glm::vec3(20.0f, 10.0f, 45.0f);
 	player.SetInputManager(inputManager);
 	player.camera.setRatio(window.getWindowRatio());
 	player.camera.setFarClipSpace(1000.0f);
+	glEnable(GL_CULL_FACE);
 }
 
 void Game::render(float delta) {
