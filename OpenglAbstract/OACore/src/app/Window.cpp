@@ -40,7 +40,7 @@ namespace ngengine {
 
 		float Window::getWindowRatio()
 		{
-			return windowSize.width / windowSize.height;
+			return ((float)windowSize.width) / ((float)windowSize.height);
 		}
 
 		void Window::updateWindow() {
