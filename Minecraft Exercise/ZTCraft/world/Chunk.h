@@ -3,8 +3,8 @@
 #include <vector>
 #include <glm/gtc/noise.hpp>
 
-#define CX 600
-#define CZ 600
+#define CX 3
+#define CZ 3
 #define CY 3
 
 typedef glm::tvec3<float> float3;
@@ -37,7 +37,7 @@ public:
 			for (float z = 0; z < CZ; z++) {
 				for (float y = 0; y < CY; y++) {
 					auto perlin = glm::perlin(glm::vec2(x * xFactor, z * zFactor));
-					perlin = round(perlin * 1000.0f);
+					perlin = round(perlin * 10.0f);
 					for (short j = 0; j < 36; j++) {
 						indicy = cube_indices[j];
 						verticesIndicyIndex = indicy * 3;
@@ -46,6 +46,17 @@ public:
 							z * 2 + cube_vertices[verticesIndicyIndex + 2]);
 						vertex.push_back(float3(pos));
 					}
+
+					PhysicalNode node;
+					node.position.x = x * 2;
+					node.position.y = perlin + y * 2;
+					node.position.z = z * 2;
+
+					node.size.depth = 2;
+					node.size.height = 2;
+					node.size.width = 2;
+
+					blocksNodes.push_back(node);
 				}
 			}
 		}
@@ -78,6 +89,7 @@ public:
 	int elements;
 	bool changed = true;
 	GLint attribute_coord;
+	std::vector<PhysicalNode> blocksNodes;
 
 	const GLbyte cube_vertices[24] = {
 		//front 

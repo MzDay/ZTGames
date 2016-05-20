@@ -5,7 +5,7 @@ GLuint BlockRenderer::modelLocation;
 void BlockRenderer::render(float delta, Block block)
 {
 	 vao.bind();
-		  glDrawElements(GL_TRIANGLE_STRIP, 36, GL_UNSIGNED_INT, 0);
+		  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 	 vao.unbind();
 }
 

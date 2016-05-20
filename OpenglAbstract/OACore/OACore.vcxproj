@@ -200,6 +200,7 @@
     <ClInclude Include="src\input\Keyboard.h" />
     <ClInclude Include="src\input\Mouse.h" />
     <ClInclude Include="src\ngengine.h" />
+    <ClInclude Include="src\physics\CollisionImplementations.h" />
     <ClInclude Include="src\physics\PhysicalEntity.h" />
     <ClInclude Include="src\physics\PhysicalNode.h" />
     <ClInclude Include="src\physics\Physics.h" />

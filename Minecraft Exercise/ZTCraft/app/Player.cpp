@@ -3,12 +3,21 @@
 Player::Player()
 {
 	physics.replaceNode(camera.getNode());
+	physics.node->size.depth = 1;
+	physics.node->size.width = 1;
+	physics.node->size.height= 1;
 }
 
 void Player::Update(float deltaTime)
 {
-	physics.update(deltaTime);
 	updateInput(deltaTime);
+
+	physics.updateVelocity(deltaTime);
+	physics.addMovementToVelocity(deltaTime);
+
+	physics.collisionsWithStaticObjects(*worldBlocksNodes);
+
+	physics.update(deltaTime);
 	camera.update();
 }
 
@@ -19,31 +28,40 @@ void Player::SetInputManager(InputManager& inputManager)
 		std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 }
 
+void Player::setWorldPointer(std::vector<PhysicalNode>& blocksNodes)
+{
+	worldBlocksNodes = &blocksNodes;
+}
+
 void Player::updateInput(float deltaTime)
 {
-	 static const float cSpeed = 0.8f;
+	 static const float cSpeed = 0.008f;
 
 	if (input == nullptr) { 
 		return;
 	}
 
 	if (input->getKeyState(GLFW_KEY_W) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3(0.0f, 0.0f, cSpeed * deltaTime));
+		physics.addToMovement(
+		camera.getMovementRelativeToCameraPlaneAndLookAt(glm::vec3(0.0f, 0.0f, cSpeed)));
 	}
 	if (input->getKeyState(GLFW_KEY_S) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3(0.0f, 0.0f, -cSpeed * deltaTime));
+		physics.addToMovement(
+			camera.getMovementRelativeToCameraPlaneAndLookAt(glm::vec3(0.0f, 0.0f, -cSpeed)));
 	}
 	if (input->getKeyState(GLFW_KEY_D) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3(cSpeed * deltaTime, 0.0f, 0.0f));
+		physics.addToMovement(
+			camera.getMovementRelativeToCameraPlaneAndLookAt(glm::vec3(cSpeed, 0.0f, 0.0f)));
 	}
 	if (input->getKeyState(GLFW_KEY_A) == KeyState::Pressed) {
-		camera.addToPositionRelativeToCameraPlaneAndLookAt(glm::vec3(-cSpeed * deltaTime, 0.0f, 0.0f));
+		physics.addToMovement(
+			camera.getMovementRelativeToCameraPlaneAndLookAt(glm::vec3(-cSpeed, 0.0f, 0.0f)));
 	}
 	if (input->getKeyState(GLFW_KEY_SPACE) == KeyState::Pressed) {
- 		camera.addToPosition(glm::vec3(0.0f, cSpeed * deltaTime, 0.0f));
+		physics.addToMovement((glm::vec3(0.0f, cSpeed, 0.0f)));
 	}
-	if (input->getKeyState(GLFW_KEY_LEFT_CONTROL) == KeyState::Pressed) {
-		camera.addToPosition(glm::vec3(0.0f, -cSpeed* deltaTime, 0.0f));
+	if (input->getKeyState(GLFW_KEY_LEFT_SHIFT) == KeyState::Pressed) {
+		physics.addToMovement((glm::vec3(0.0f, -cSpeed, 0.0f)));
 	}
 	if (input->getKeyState(GLFW_KEY_ESCAPE) == KeyState::Pressed) {
 		 exit(0);

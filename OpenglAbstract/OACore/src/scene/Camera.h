@@ -42,6 +42,9 @@ namespace ngengine {
 			float getSensetivity() const;
 			utils::Orientation getOrientation() const;
 
+			glm::vec3 getMovementRelativeToCameraFront(glm::vec3 positionOffset);
+			glm::vec3 getMovementRelativeToCameraPlaneAndLookAt(glm::vec3 positionOffset);
+
 		private:
 			void updateFront();
 			void updateProjection();

@@ -22,6 +22,7 @@ void Game::startup() {
 	player.SetInputManager(inputManager);
 	player.camera.setRatio(window.getWindowRatio());
 	player.camera.setFarClipSpace(10000.0f);
+	player.setWorldPointer(chunk.blocksNodes);
 	glEnable(GL_CULL_FACE);
 }
 

@@ -31,7 +31,7 @@ public:
 		// Set the data andn vertex attribute in this order (buffers data not important)
 		vbo.setData(cube_vertices, sizeof(cube_vertices), GL_STATIC_DRAW);
 		ebo.setData(cube_indices, sizeof(cube_indices), GL_STATIC_DRAW);
-		vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, nullptr);
+		vao.setVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 		// unbind the VAO *IMPORTANT*
 		vao.unbind();

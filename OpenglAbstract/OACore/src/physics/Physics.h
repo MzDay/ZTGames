@@ -8,8 +8,8 @@ namespace ngengine {
 		class Physics {
 
 		public:
-			static glm::vec3 UpdatePosition(glm::vec3 position, glm::vec3 velocity, float deltaTime);
-			static glm::vec3 UpdateVelocity(glm::vec3 velocity, glm::vec3 acceleration, float deltaTime);
+			static glm::vec3 UpdatePosition(glm::vec3 position, glm::vec3 velocity);
+			static glm::vec3 UpdateVelocity(glm::vec3 velocity, glm::vec3 acceleration);
 		};
 	}
 }

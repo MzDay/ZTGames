@@ -76,7 +76,7 @@ namespace ngengine {
 
 		glm::mat4 Camera::getCameraMatrix() const
 		{
-			return projection * lookAt ;
+			return projection * lookAt;
 		}
 
 		glm::vec3 Camera::getPosition() const
@@ -97,6 +97,20 @@ namespace ngengine {
 		utils::Orientation Camera::getOrientation() const
 		{
 			return node->orientation;
+		}
+
+		glm::vec3 scene::Camera::getMovementRelativeToCameraFront(glm::vec3 positionOffset)
+		{
+			return positionOffset.x * glm::normalize(glm::cross(front, up)) +
+				positionOffset.y * up +
+				positionOffset.z * front;
+		}
+
+		glm::vec3 scene::Camera::getMovementRelativeToCameraPlaneAndLookAt(glm::vec3 positionOffset)
+		{
+			glm::vec3 xCross = glm::cross(front, up);
+
+			return positionOffset.x * xCross + positionOffset.z * glm::normalize(glm::cross(up, xCross));
 		}
 
 #pragma endregion

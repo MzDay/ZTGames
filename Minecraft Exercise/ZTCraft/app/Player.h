@@ -7,6 +7,7 @@
 #include "input\Keyboard.h"
 #include "utils\Position.h"
 
+using ngengine::physics::PhysicalNode;
 using ngengine::entityProperties::PhysicsProperty;
 using ngengine::scene::Camera;
 using ngengine::input::InputManager;
@@ -23,9 +24,13 @@ public:
 	void Update(float deltaTime);
 	void SetInputManager(InputManager& inputManager);
 
+	void setWorldPointer(std::vector<PhysicalNode>& blocksNodes);
+
 private:
 	void updateInput(float deltaTime);
 	void handleMouseInput(double oldX, double oldY, double newX, double newY);
+
+	std::vector<PhysicalNode>* worldBlocksNodes;
 
 public:
 	Camera camera;

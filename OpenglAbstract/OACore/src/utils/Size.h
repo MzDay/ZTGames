@@ -16,5 +16,14 @@ namespace ngengine {
 			int height;
 			int depth;
 		};
+
+		struct f_Size3D {
+			float width;
+			float height;
+			float depth;
+
+			f_Size3D() : width(0), height(0), depth(0) {}
+			f_Size3D(float width, float height, float depth) : width(width), height(height), depth(depth) {}
+		};
 	}
 }
