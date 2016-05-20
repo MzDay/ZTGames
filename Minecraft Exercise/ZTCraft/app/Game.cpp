@@ -9,15 +9,6 @@ void Game::startup() {
 
 	program.useProgram();
 
-	// Bind the program with the blocks
-	//BlockRenderer::setProgramId(program.getProgram())
-	chunk.setProgramId(program.getProgram());
-	auto start = timer.getPassedTime();
-	chunk.update();
-	auto end = timer.getPassedTime();
-
-	std::cout << "Time took " << end - start << "s\n";
-
 	(player.physics.node)->position = glm::vec3(20.0f, 10.0f, 45.0f);
 	player.SetInputManager(inputManager);
 	player.camera.setRatio(window.getWindowRatio());
@@ -28,21 +19,23 @@ void Game::startup() {
 void Game::render(float delta) {
 	// We only have one program so this is fine for now
 
-	static const GLfloat color[] = { 0.6f, 0.7f, 0.5f, 1.0f };
-	glClearBufferfv(GL_COLOR, 0, color);
-	glClear(GL_DEPTH_BUFFER_BIT);
+	static const GLfloat color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	static const GLfloat one = 1.0f;
 
-	//world.render(delta);
-	chunk.render();
+	glClearBufferfv(GL_COLOR, 0, color);
+	glClearBufferfv(GL_DEPTH_BUFFER_BIT, 0, &one);
+
+	world.render(delta);
 }
 
 void Game::update(float delta) {
-	//world.update(delta);
 	player.Update(delta);
 
 	glm::mat4 cameraMatrix = player.camera.getCameraMatrix();
 	GLuint cameraMatrixLoc = program.getUniformLocation("cameraMatrix");
 	glUniformMatrix4fv(cameraMatrixLoc, 1, GL_FALSE, glm::value_ptr(cameraMatrix));
+
+	world.update(delta);
 }
 
 void Game::shutdown() {

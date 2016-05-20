@@ -16,9 +16,6 @@ namespace ngengine {
 			glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 			windowHandle = glfwCreateWindow(windowSize.width, windowSize.height, windowTitle.c_str(), nullptr, nullptr);
 
-			// First hide the window
-			glfwHideWindow(windowHandle);
-
 			glfwSetWindowSizeCallback(windowHandle, onResizeCallback);
 		}
 

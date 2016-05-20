@@ -5,18 +5,17 @@
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\Player.cpp" />
     <ClCompile Include="world\World.cpp" />
-    <ClCompile Include="world\BlockRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\Game.h" />
     <ClInclude Include="app\Player.h" />
     <ClInclude Include="world\SeedBasedRandom.h" />
     <ClInclude Include="world\World.h" />
-    <ClInclude Include="world\BlockRenderer.h" />
-    <ClInclude Include="world\Chunk.h" />
+    <ClInclude Include="config.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
+    <None Include="vertex.glsl.old" />
     <None Include="vertex.glsl" />
   </ItemGroup>
 </Project>
