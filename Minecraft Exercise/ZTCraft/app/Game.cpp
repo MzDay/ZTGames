@@ -23,7 +23,7 @@ void Game::render(float delta) {
 	static const GLfloat one = 1.0f;
 
 	glClearBufferfv(GL_COLOR, 0, color);
-	glClearBufferfv(GL_DEPTH_BUFFER_BIT, 0, &one);
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	world.render(delta);
 }

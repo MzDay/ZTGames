@@ -47,8 +47,8 @@ public:
 		  GLint id;
 		  glGetIntegerv(GL_CURRENT_PROGRAM, &id);
 		  GLuint model_pos = glGetUniformLocation(id, "model");
-		  glm::mat4 model;
 		  for (auto kv : blocks) {
+			   glm::mat4 model;
 			   model = glm::translate(model, glm::vec3(kv.second.x, kv.second.y, kv.second.z));
 			   glUniformMatrix4fv(model_pos, 1, GL_FALSE, glm::value_ptr(model));
 			   glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
@@ -75,9 +75,9 @@ public:
 		 Chunk test;
 		 std::unordered_map<glm::ivec3, Block> data;
 
-		 for (int x = -20; x < 100; ++x) {
-			  for (int y = -20; y < 100; ++y) {
-				   for (int z = 0; z < 3; ++z) {
+		 for (int x = 0; x < 100; ++x) {
+			  for (int y = 0; y < 100; ++y) {
+				   for (int z = 0; z < 5; ++z) {
 						data[glm::ivec3(x, y, z)] = Block{ x,y,z,0 };
 				   }
 			  }

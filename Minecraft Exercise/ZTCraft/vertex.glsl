@@ -9,5 +9,5 @@ out vec4 colorfs;
 
 void main(){
 	 gl_Position = cameraMatrix * model * vec4(coord.xyz, 1.0f);
-	 colorfs = gl_Position;
+	 colorfs = vec4(coord,1.0f);
 }
