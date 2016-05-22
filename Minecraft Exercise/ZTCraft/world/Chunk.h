@@ -41,20 +41,20 @@ public:
 					for (short j = 0; j < 36; j++) {
 						indicy = cube_indices[j];
 						verticesIndicyIndex = indicy * 3;
-						glm::vec3 pos = glm::vec3(x * 2 + cube_vertices[verticesIndicyIndex],
-							perlin + y * 2 + cube_vertices[verticesIndicyIndex + 1],
-							z * 2 + cube_vertices[verticesIndicyIndex + 2]);
+						glm::vec3 pos = glm::vec3(x + cube_vertices[verticesIndicyIndex],
+							perlin + y  + cube_vertices[verticesIndicyIndex + 1],
+							z  + cube_vertices[verticesIndicyIndex + 2]);
 						vertex.push_back(float3(pos));
 					}
 
 					PhysicalNode node;
-					node.position.x = x * 2;
-					node.position.y = perlin + y * 2;
-					node.position.z = z * 2;
+					node.position.x = x ;
+					node.position.y = perlin + y;
+					node.position.z = z ;
 
-					node.size.depth = 2;
-					node.size.height = 2;
-					node.size.width = 2;
+					node.size.depth = 1;
+					node.size.height = 1;
+					node.size.width = 1;
 
 					blocksNodes.push_back(node);
 				}
@@ -91,17 +91,17 @@ public:
 	GLint attribute_coord;
 	std::vector<PhysicalNode> blocksNodes;
 
-	const GLbyte cube_vertices[24] = {
+	const GLfloat cube_vertices[24] = {
 		//front 
-		-1, -1,  1,
-		1, -1,  1,
-		1,  1,  1,
-		-1,  1,  1,
+		-0.5, -0.5,  0.5,
+		0.5, -0.5,  0.5,
+		0.5,  0.5,  0.5,
+		-0.5,  0.5,  0.5,
 		//back
-		-1, -1, -1,
-		1, -1, -1,
-		1,  1, -1,
-		-1,  1, -1,
+		-0.5, -0.5, -0.5,
+		0.5, -0.5, -0.5,
+		0.5,  0.5, -0.5,
+		-0.5,  0.5, -0.5,
 	};
 
 	const GLbyte cube_indices[36] = {
